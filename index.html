@@ -58,7 +58,7 @@
     <div class="tagcloud-mask"></div>  
 <div class="tagcloud" id="tagcloud">
     <div class="tagcloud-inner">
-        <a href="/SeanCherngTW.github.io/tags/Python/" style="font-size: 14px;">Python</a>
+        <a href="/SeanCherngTW.github.io/tags/LeetCode/" style="font-size: 14px;">LeetCode</a> <a href="/SeanCherngTW.github.io/tags/Python/" style="font-size: 14px;">Python</a> <a href="/SeanCherngTW.github.io/tags/網頁爬蟲/" style="font-size: 14px;">網頁爬蟲</a>
     </div>
 </div>
     <header class="header" id="header">
@@ -118,7 +118,7 @@
         
         
             <li class="menu-item">
-                <a href="/SeanCherngTW.github.io/about">
+                <a href="https://github.com/SeanCherngTW">
                     <span>About</span>
                     
                     
@@ -166,7 +166,7 @@
                     </div>
                     <div class="mobile-nav-tagcloud">
                         <div class="mobile-tagcloud-inner">
-                            <a href="/SeanCherngTW.github.io/tags/Python/" style="font-size: 14px;">Python</a>
+                            <a href="/SeanCherngTW.github.io/tags/LeetCode/" style="font-size: 14px;">LeetCode</a> <a href="/SeanCherngTW.github.io/tags/Python/" style="font-size: 14px;">Python</a> <a href="/SeanCherngTW.github.io/tags/網頁爬蟲/" style="font-size: 14px;">網頁爬蟲</a>
                         </div>
                     </div>
                 </div>
@@ -174,7 +174,7 @@
             
             
                 <div class="mobile-nav-item">
-                    <a href="/SeanCherngTW.github.io/about">
+                    <a href="https://github.com/SeanCherngTW">
                         <span>About</span>
                         
                         
@@ -213,6 +213,45 @@
             </div>
             <h1 class="post-title syuanpi riseIn-light back-2">
             
+                <a href="/SeanCherngTW.github.io/2017/10/07/LeetCode-107-Binary-Tree-Level-Order-Traversal-II/">LeetCode - 107. Binary Tree Level Order Traversal II</a>
+            
+            </h1>
+            
+        </header>
+        <div class="post-content syuanpi riseIn-light back-3">
+            
+                
+                    <p>題目：
+<a href="https://leetcode.com/problems/binary-tree-level-order-traversal-ii/description/" target="_blank" rel="external">107. Binary Tree Level Order Traversal II</a>
+Given a binary tree, return the bottom-up level order traversal of its nodes&#39; values. (ie, from left to right, level by level from leaf to root).</p>
+<p>解釋：
+輸入一棵樹，以Level order traversal走訪，並以buttom-up回傳每個Node的值</p>
+<p>思路：
+用類似BFS的概念，但必須記下每一個Node代表的Level。
+                    
+            
+        
+            <p class="content-link">
+                <a href="/SeanCherngTW.github.io/2017/10/07/LeetCode-107-Binary-Tree-Level-Order-Traversal-II/#more">
+                    <span class="iconfont icon-right">Read More...</span>
+                </a>
+            </p>
+        
+        </div>
+        
+    </article>
+    
+
+    
+        
+    <article class="post">
+        <header class="post-header">
+            <div class="post-time syuanpi riseIn-light back-1">
+                <span>October 7, 2017</span>
+                
+            </div>
+            <h1 class="post-title syuanpi riseIn-light back-2">
+            
                 <a href="/SeanCherngTW.github.io/2017/10/07/Selenium-Beautiful-Soup-爬蟲入門/">Selenium + Beautiful Soup 爬蟲入門</a>
             
             </h1>
@@ -225,48 +264,21 @@
 首先要安裝</p>
 <ol>
 <li>selenium</li>
-<li>bs4</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ pip install selenium</div><div class="line">$ pip install bs4</div></pre></td></tr></table></figure>
-<ol>
-<li><a href="https://sites.google.com/a/chromium.org/chromedriver/downloads" target="_blank" rel="external">ChromeDriver</a>(你也可以裝其他瀏覽器的Driver)</li>
+<li><p>bs4</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ pip install selenium</div><div class="line">$ pip install bs4</div></pre></td></tr></table></figure>
+</li>
+<li><p><a href="https://sites.google.com/a/chromium.org/chromedriver/downloads" target="_blank" rel="external">ChromeDriver</a>(你也可以裝其他瀏覽器的Driver)</p>
+</li>
 </ol>
 <p>環境搞定後就開始寫程式吧！
-首先你得要先匯入相關套件
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> selenium <span class="keyword">import</span> webdriver</div><div class="line"><span class="keyword">from</span> bs4 <span class="keyword">import</span> BeautifulSoup</div></pre></td></tr></table></figure></p>
-<p>告訴Selenium的Webdriver你要爬的網頁
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">browser = webdriver.Chrome()</div><div class="line">browser.get(<span class="string">'你要爬的網址'</span>)</div></pre></td></tr></table></figure></p>
-<p>現在可以執行看看程式，已經會開瀏覽器自動連到這個網站囉～</p>
-<p>再來你得透過Beautiful Soup去取得網頁原始碼
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">soup = BeautifulSoup(browser.page_source, <span class="string">"html.parser"</span>)</div></pre></td></tr></table></figure></p>
-<p>注意！如果你要爬的網頁有切成很多frame
-你會在原始碼看到類似這樣的東西
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&lt;frame name=&quot;navigation&quot;&gt;</div><div class="line">...</div><div class="line">&lt;/frame&gt;</div><div class="line"></div><div class="line">&lt;frame name=&quot;home&quot;&gt;</div><div class="line">...</div><div class="line">&lt;/frame&gt;</div></pre></td></tr></table></figure></p>
-<p>這時候請記得，一定要把webdriver切換到「你要抓的內容」所在的frame
-才有辦法抓到你要的東西
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">browser.switch_to.frame(<span class="string">'navigation'</span>)</div></pre></td></tr></table></figure></p>
-<p>或
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">browser.switch_to.frame(<span class="string">'home'</span>)</div></pre></td></tr></table></figure></p>
-<p>記得一件事情，如果你現在已經在navigation frame，想要切到home frame的話
-你是不能直接切換的，你得先切回預設frame，才能切到home frame
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 假設現在在navigation frame</span></div><div class="line"></div><div class="line"><span class="comment"># 切回預設frame</span></div><div class="line">browser.switch_to.default_content()</div><div class="line"><span class="comment"># 才能再切到其他frame</span></div><div class="line">browser.switch_to.frame(<span class="string">'home'</span>)</div></pre></td></tr></table></figure></p>
-<p>由於我們一般人在做網頁爬蟲時
-我們通常只會關心網頁的「內容」
-而對於網頁的樣式設定\&lt;\style>或是一些功能的實作\&lt;\script>並不是很在意
-所以我們可以先把\&lt;\style>和\&lt;\script>的標籤從剛剛取得的soup中移除
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> script <span class="keyword">in</span> soup([<span class="string">"script"</span>, <span class="string">"style"</span>]):</div><div class="line">    script.extract()</div></pre></td></tr></table></figure></p>
-<p>現在就可以正式開始取得我們要的資料囉～
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 找某一個tag</span></div><div class="line">data = soup.select(<span class="string">"tagname"</span>)</div><div class="line"><span class="comment"># 或你想逐層尋找</span></div><div class="line">data = soup.select(<span class="string">"html body title"</span>)</div><div class="line"></div><div class="line"><span class="comment"># 找某一個class</span></div><div class="line">data = soup.select(<span class="string">".classname"</span>)</div><div class="line"></div><div class="line"><span class="comment"># 找某一個id</span></div><div class="line">data = soup.select(<span class="string">"#idname"</span>)</div></pre></td></tr></table></figure></p>
-<p>你也可以用find()方法
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 回傳id=innerdiv的div tag</span></div><div class="line">data = soup.find(<span class="string">"div"</span>, &#123;<span class="string">"id"</span>, <span class="string">"innerdiv"</span>&#125;)</div><div class="line"></div><div class="line"><span class="comment"># 回傳所有id=innerdiv的div tag，預設會走訪每一層去找有沒有符合條件的tag</span></div><div class="line">datalist = soup.find_all(<span class="string">"div"</span>, &#123;<span class="string">"id"</span>, <span class="string">"innerdiv"</span>&#125;)</div><div class="line"></div><div class="line"><span class="comment"># 如果你只想針對第一層搜尋，不想去走訪每一層，你可以關掉recursive</span></div><div class="line">datalist = soup.find_all(<span class="string">"div"</span>, &#123;<span class="string">"id"</span>, <span class="string">"innerdiv"</span>&#125;, recursive=<span class="keyword">False</span>)</div></pre></td></tr></table></figure></p>
-<p>這些方法回傳的物件都會是\&lt;\bs4.Element.Tag>物件
-我們也可以存取這些物件的一些屬性，比如:
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 先判斷這個data有沒有class，他會存在list裡面，如果有的話再取出來</span></div><div class="line"><span class="keyword">if</span> isinstance(data.get(<span class="string">'class'</span>), list):</div><div class="line">    data.get(<span class="string">'class'</span>)[<span class="number">0</span>]</div><div class="line"></div><div class="line"><span class="comment"># 回傳這筆資料的tag</span></div><div class="line">data.name</div><div class="line"></div><div class="line"><span class="comment"># 回傳這筆資料的內文(可以想成拿掉所有標籤後剩下的文字)</span></div><div class="line">data.text</div></pre></td></tr></table></figure></p>
-<p>有些data.text印出來會有很多空白，要消除多餘的空白的話可以這樣做
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> re</div><div class="line">newdata = re.sub(<span class="string">'(\\r\\n|\\r|\\n)+'</span>, <span class="string">' '</span>, data.text)</div></pre></td></tr></table></figure></p>
-
-                
+                    
             
+        
+            <p class="content-link">
+                <a href="/SeanCherngTW.github.io/2017/10/07/Selenium-Beautiful-Soup-爬蟲入門/#more">
+                    <span class="iconfont icon-right">Read More...</span>
+                </a>
+            </p>
         
         </div>
         
@@ -301,7 +313,7 @@
             <div class="copyright">
     <div class="info">
         <span>&copy;</span>
-        <span>1970 ~ 2017</span>
+        <span>2017 ~ 2017</span>
         <span>❤</span>
         <span>Sean Cherng</span>
     </div>
@@ -364,11 +376,11 @@ $(document).ready(function(){
     </div>
     <script>
     var GREETING = {
-        morning: "当我们探索时，就要发现到真理",
-        noon: "人的天职在于勇于探索真理。",
-        after: "一件事实是一条没有性别的真理",
-        night: "真理有时可能变得黯淡，但它永远不会熄灭",
-        midnight: "真理在人那里获得生命力，并且展现出来"
+        morning: "想找什麼呢？",
+        noon: "想找什麼呢？",
+        after: "想找什麼呢？",
+        night: "想找什麼呢？",
+        midnight: "想找什麼呢？"
     }
     $(document).ready(function(){
         Nlvi.search();
