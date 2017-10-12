@@ -234,8 +234,8 @@ Given a positive integer, check whether it has alternating bits: namely, if two 
 11010 -&gt; False<br>
 1     -&gt; True</p>
 <p><b>思路：</b><br>
-假設輸入的整數為n，n轉為二進位後，他的最大位元（最左邊的）一定為1
-我們要找一個最大的i，使得2<sup>i</sup> &lt; n
+假設輸入的整數為n，n轉為二進位後，他的最大位元（最左邊的）一定為1<br>
+我們要找一個最大的i，使得2<sup>i</sup> &lt; n<br>
 若n的輸出為True，根據i是奇數或偶數，以下兩條式子必有一個成立<br>
 n = 2<sup>0</sup> + 2<sup>2</sup> + 2<sup>4</sup> + ... + 2<sup>i</sup><br>
 n = 2<sup>1</sup> + 2<sup>3</sup> + 2<sup>5</sup> + ... + 2<sup>i</sup>
