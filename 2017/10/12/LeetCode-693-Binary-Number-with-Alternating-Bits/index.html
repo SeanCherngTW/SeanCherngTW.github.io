@@ -1,11 +1,7 @@
 <!DOCTYPE html>
 <html lang="">
 <head>
-    <title>
-  
-    Archives · Sean Chenrg's Blog
-  
-</title>
+    <title> LeetCode - 693. Binary Number with Alternating Bits · Sean Chenrg's Blog </title>
     <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
@@ -20,6 +16,8 @@
 
 
 
+
+    <meta name="keywords" content="LeetCode, Python, Nlvi" />
 
 <link rel="stylesheet" href="/SeanCherngTW.github.io/style/style.css">
 <script src="/SeanCherngTW.github.io/script/jquery.min.js"></script>
@@ -202,99 +200,131 @@
         <main class="main" id="main">
             
     
-    <div class="archive syuanpi riseIn-light" id="archive">
-        
-            <h1 class="archive-title">Total</h1>
-            <span class="archive-num">4 Posts In Total</span>
-        
-        <div class="archive-list">
-            <ul>
-        
+    <article class="post">
+        <header class="post-header">
+            <div class="post-time syuanpi riseIn-light back-1">
+                <span>October 12, 2017</span>
+                
+            </div>
+            <h1 class="post-title syuanpi riseIn-light back-2">
+            
+                LeetCode - 693. Binary Number with Alternating Bits
+            
+            </h1>
             
                 
-                
-                
+                    <div class="post-tags syuanpi riseIn-light back-3">
                     
-                     
-                        <h2 class="archive-year"> 2017 </h2>
+                        <a href="/SeanCherngTW.github.io/tags/LeetCode/">LeetCode</a>
                     
+                        <a href="/SeanCherngTW.github.io/tags/Python/">Python</a>
+                    
+                    </div>
                 
             
+        </header>
+        <div class="post-content syuanpi riseIn-light back-3">
             
-            <li class="archive-post">
-                <span class="archive-post-time">
-                
-                    10-12
-                
-                </span>
-                <span class="archive-post-link">
-                    <a href="/SeanCherngTW.github.io/2017/10/12/LeetCode-693-Binary-Number-with-Alternating-Bits/">LeetCode - 693. Binary Number with Alternating Bits</a>
-                </span>
-            </li>
-
+                <p><b>題目：</b><br>
+<a href="https://leetcode.com/problems/binary-number-with-alternating-bits/description/" target="_blank" rel="external">693. Binary Number with Alternating Bits</a><br>
+Given a positive integer, check whether it has alternating bits: namely, if two adjacent bits will always have different values.</p>
+<p><b>解釋：</b><br>
+輸入一個整數，判斷這個整數轉為二進位後，每個bit的兩個相鄰bits是不是都和該bit不同<br>
+10101 -&gt; True<br>
+11010 -&gt; False<br>
+1     -&gt; True</p>
+<p><b>思路：</b><br>
+假設輸入的整數為n，n轉為二進位後，他的最大位元（最左邊的）一定為1
+我們要找一個最大的i，使得2<sup>i</sup> &lt; n
+若n的輸出為True，n = 2<sup>0</sup> + 2<sup>1</sup> + 2<sup>2</sup> + ... + 2<sup>i</sup>恆成立
+<a id="more"></a></p>
+<ol>
+<li>首先找到i</li>
+<li>符合條件的n一定符合 n = 2<sup>0</sup> + 2<sup>1</sup> + 2<sup>2</sup> + ... + 2<sup>i</sup>也可以改寫成<br>
+n = 2<sup>i</sup> + 2<sup>i-2</sup> + 2<sup>i-4</sup> + ... + 2<sup>1</sup> (位元數目為奇數時)<br>
+或 <br>
+n = 2<sup>i</sup> + 2<sup>i-2</sup> + 2<sup>i-4</sup> + ... + 2<sup>0</sup> (位元數目為偶數時)<br></li>
+<li>因此可得<br>
+n - 2<sup>i</sup> - 2<sup>i-2</sup> - 2<sup>i-4</sup> - ... - 2<sup>1</sup> = 0 (位元數目為奇數時)<br>
+或<br>
+n - 2<sup>i</sup> - 2<sup>i-2</sup> - 2<sup>i-4</sup> - ... - 2<sup>0</sup> = 0 (位元數目為偶數時)<br></li>
+<li>若符合上述兩個等式之一，則回傳True，反之回傳False</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">hasAlternatingBits</span><span class="params">(self, n)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line"><span class="string">        :type n: int</span></div><div class="line"><span class="string">        :rtype: bool</span></div><div class="line"><span class="string">        """</span></div><div class="line">        i = <span class="number">0</span></div><div class="line">        <span class="keyword">while</span> <span class="number">2</span>**i &lt;= n:</div><div class="line">            i += <span class="number">1</span></div><div class="line">        i -= <span class="number">1</span></div><div class="line">        <span class="keyword">while</span> i &gt;= <span class="number">0</span>:</div><div class="line">            n -= <span class="number">2</span>**i</div><div class="line">            i -= <span class="number">2</span></div><div class="line">        <span class="keyword">return</span> n == <span class="number">0</span></div></pre></td></tr></table></figure>
+            
         
-            
-                
-                
-                
-            
-            
-            <li class="archive-post">
-                <span class="archive-post-time">
-                
-                    10-12
-                
-                </span>
-                <span class="archive-post-link">
-                    <a href="/SeanCherngTW.github.io/2017/10/12/LeetCode-404-Sum-of-Left-Leaves/">LeetCode - 404. Sum of Left Leaves</a>
-                </span>
-            </li>
-
-        
-            
-                
-                
-                
-            
-            
-            <li class="archive-post">
-                <span class="archive-post-time">
-                
-                    10-07
-                
-                </span>
-                <span class="archive-post-link">
-                    <a href="/SeanCherngTW.github.io/2017/10/07/LeetCode-107-Binary-Tree-Level-Order-Traversal-II/">LeetCode - 107. Binary Tree Level Order Traversal II</a>
-                </span>
-            </li>
-
-        
-            
-                
-                
-                
-            
-            
-            <li class="archive-post">
-                <span class="archive-post-time">
-                
-                    10-07
-                
-                </span>
-                <span class="archive-post-link">
-                    <a href="/SeanCherngTW.github.io/2017/10/07/Selenium-Beautiful-Soup-爬蟲入門/">Selenium + Beautiful Soup 爬蟲入門</a>
-                </span>
-            </li>
-
-        
-            </ul>
         </div>
-    </div>
+        
+            
+            
+        
+    </article>
     
-    <nav class="pagination">
-        <span class="page-number current">1</span>
+        
+    <nav class="article-page">
+        
+        
+            <a href="/SeanCherngTW.github.io/2017/10/12/LeetCode-404-Sum-of-Left-Leaves/" id="art-right" class="art-left">
+                <span class="prev-title"> 
+                    <i class="iconfont icon-left"></i>LeetCode - 404. Sum of Left Leaves
+                </span>
+            </a>
+        
     </nav>
 
+        
+    <i id="com-switch" class="iconfont icon-more jumping-in long infinite" style="font-size:24px;display:block;text-align:center;transform:rotate(180deg);"></i>
+    <div class="post-comments" id="post-comments" style="display: block;margin: auto 16px;">
+        
+        
+<!-- Gitment Comments -->
+<div id="gitment"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+var gitment = new Gitment({
+  owner: "",
+  repo: '',
+  oauth: {
+    client_id: '',
+    client_secret: '',
+  },
+})
+gitment.render('gitment')
+</script>
+
+        
+<!-- SOHUCS Comments -->
+<div id="SOHUCS"></div> 
+<script type="text/javascript"> 
+(function(){ 
+var appid = '';
+var conf = '';
+var width = window.innerWidth || document.documentElement.clientWidth; 
+if (width < 960) { 
+window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="http://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("http://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})}); } })(); </script>
+
+        
+<!-- Disqus Comments -->
+<div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+<script type="text/javascript">
+    var disqus_shortname = 'SeanCherngTW';
+
+    (function(){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+    </div>
+
+    
 
 
         </main>
@@ -362,6 +392,8 @@ $(document).ready(function(){
 })
 </script>
     </div>
+    
+        
     
     <div class="backtop syuanpi dead toTop" id="backtop">
     <i class="iconfont icon-up"></i>

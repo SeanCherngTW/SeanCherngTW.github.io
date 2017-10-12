@@ -213,6 +213,50 @@
             </div>
             <h1 class="post-title syuanpi riseIn-light back-2">
             
+                <a href="/SeanCherngTW.github.io/2017/10/12/LeetCode-693-Binary-Number-with-Alternating-Bits/">LeetCode - 693. Binary Number with Alternating Bits</a>
+            
+            </h1>
+            
+        </header>
+        <div class="post-content syuanpi riseIn-light back-3">
+            
+                
+                    <p><b>題目：</b><br>
+<a href="https://leetcode.com/problems/binary-number-with-alternating-bits/description/" target="_blank" rel="external">693. Binary Number with Alternating Bits</a><br>
+Given a positive integer, check whether it has alternating bits: namely, if two adjacent bits will always have different values.</p>
+<p><b>解釋：</b><br>
+輸入一個整數，判斷這個整數轉為二進位後，每個bit的兩個相鄰bits是不是都和該bit不同<br>
+10101 -&gt; True<br>
+11010 -&gt; False<br>
+1     -&gt; True</p>
+<p><b>思路：</b><br>
+假設輸入的整數為n，n轉為二進位後，他的最大位元（最左邊的）一定為1
+我們要找一個最大的i，使得2<sup>i</sup> &lt; n
+若n的輸出為True，n = 2<sup>0</sup> + 2<sup>1</sup> + 2<sup>2</sup> + ... + 2<sup>i</sup>恆成立
+                    
+            
+        
+            <p class="content-link">
+                <a href="/SeanCherngTW.github.io/2017/10/12/LeetCode-693-Binary-Number-with-Alternating-Bits/#more">
+                    <span class="iconfont icon-right">Read More...</span>
+                </a>
+            </p>
+        
+        </div>
+        
+    </article>
+    
+
+    
+        
+    <article class="post">
+        <header class="post-header">
+            <div class="post-time syuanpi riseIn-light back-1">
+                <span>October 12, 2017</span>
+                
+            </div>
+            <h1 class="post-title syuanpi riseIn-light back-2">
+            
                 <a href="/SeanCherngTW.github.io/2017/10/12/LeetCode-404-Sum-of-Left-Leaves/">LeetCode - 404. Sum of Left Leaves</a>
             
             </h1>
@@ -221,12 +265,12 @@
         <div class="post-content syuanpi riseIn-light back-3">
             
                 
-                    <p>題目：<br>
+                    <p><b>題目：</b><br>
 <a href="https://leetcode.com/problems/sum-of-left-leaves/description/" target="_blank" rel="external">404. Sum of Left Leaves</a><br>
 Find the sum of all left leaves in a given binary tree.</p>
-<p>解釋：
+<p><b>解釋：</b><br>
 輸入一棵樹，求出該樹所有「左葉子」值的加總</p>
-<p>思路：
+<p><b>思路：</b><br>
 遞迴走訪左右子樹，並記錄下每一棵子樹屬於左子樹還是右子樹，直到葉子為止，這時即可知道哪些是左葉子，哪些是右葉子。
                     
             
@@ -260,12 +304,12 @@ Find the sum of all left leaves in a given binary tree.</p>
         <div class="post-content syuanpi riseIn-light back-3">
             
                 
-                    <p>題目：<br>
+                    <p><b>題目：</b><br>
 <a href="https://leetcode.com/problems/binary-tree-level-order-traversal-ii/description/" target="_blank" rel="external">107. Binary Tree Level Order Traversal II</a><br>
 Given a binary tree, return the bottom-up level order traversal of its nodes&#39; values. (ie, from left to right, level by level from leaf to root).</p>
-<p>解釋：
+<p><b>解釋：</b><br>
 輸入一棵樹，以Level order traversal走訪，並以buttom-up回傳每個Node的值</p>
-<p>思路：
+<p><b>思路：</b><br>
 用類似BFS的概念，但必須記下每一個Node代表的Level。
                     
             
