@@ -231,15 +231,15 @@ Given a Binary Search Tree and a target number, return true if there exist two e
 再來遍歷整棵二元搜尋樹，對每一個節點的值val，判斷(val - k)有沒有在這個集合當中<br>
 若無，則將該節點的值存入集合中，並繼續遍歷<br>
 若有，則回傳True<br>
-若遍歷完整棵二元搜尋樹都沒有找到答案，則回傳False<br></p>
-<p><b>例子：</b><br>
-輸入：[5, 3, 6, 2, 4, 7] k=9
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">1. </div><div class="line">set = NULL</div><div class="line">(9-5) not in set</div><div class="line">set.insert(5)</div><div class="line"></div><div class="line">2.</div><div class="line">set = (5)</div><div class="line">(9-3) not in set</div><div class="line">set.insert(3)</div><div class="line"></div><div class="line">3.</div><div class="line">set = (5, 3)</div><div class="line">(9-6) in set</div><div class="line">return True</div></pre></td></tr></table></figure></p>
-<p><b>程式碼：</b><br>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * Definition for a binary tree node.</div><div class="line"> * struct TreeNode &#123;</div><div class="line"> *     int val;</div><div class="line"> *     TreeNode *left;</div><div class="line"> *     TreeNode *right;</div><div class="line"> *     TreeNode(int x) : val(x), left(NULL), right(NULL) &#123;&#125;</div><div class="line"> * &#125;;</div><div class="line"> */</div><div class="line">class Solution &#123;</div><div class="line">public:</div><div class="line">    unordered_set&lt;int&gt; s;</div><div class="line">    int target;</div><div class="line">    </div><div class="line">    bool findTarget(TreeNode* root, int k) &#123;</div><div class="line">        target = k;</div><div class="line">        return traversal(root);</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    bool traversal(TreeNode* node)&#123;</div><div class="line">        if(node == NULL)</div><div class="line">            return false;</div><div class="line">        if(s.count(target - node-&gt;val) &gt; 0)</div><div class="line">            return true;</div><div class="line">        </div><div class="line">        s.insert(node-&gt;val);</div><div class="line">        return traversal(node-&gt;left) || traversal(node-&gt;right);</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
-
-                
+若遍歷完整棵二元搜尋樹都沒有找到答案，則回傳False<br>
+                    
             
+        
+            <p class="content-link">
+                <a href="/SeanCherngTW.github.io/2018/02/15/LeetCode-653-Two-Sum-IV-Input-is-a-BST/#more">
+                    <span class="iconfont icon-right">Read More...</span>
+                </a>
+            </p>
         
         </div>
         
