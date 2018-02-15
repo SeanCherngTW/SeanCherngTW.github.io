@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="">
 <head>
-    <title> Selenium + Beautiful Soup 爬蟲入門 · Sean Chenrg's Blog </title>
+    <title> LeetCode - 653. Two Sum IV - Input is a BST · Sean Chenrg's Blog </title>
     <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
@@ -17,7 +17,7 @@
 
 
 
-    <meta name="keywords" content="Python, 網頁爬蟲, Nlvi" />
+    <meta name="keywords" content="LeetCode, Python, Nlvi" />
 
 <link rel="stylesheet" href="/SeanCherngTW.github.io/style/style.css">
 <script src="/SeanCherngTW.github.io/script/jquery.min.js"></script>
@@ -203,21 +203,21 @@
     <article class="post">
         <header class="post-header">
             <div class="post-time syuanpi riseIn-light back-1">
-                <span>October 7, 2017</span>
+                <span>February 15, 2018</span>
                 
             </div>
             <h1 class="post-title syuanpi riseIn-light back-2">
             
-                Selenium + Beautiful Soup 爬蟲入門
+                LeetCode - 653. Two Sum IV - Input is a BST
             
             </h1>
             
                 
                     <div class="post-tags syuanpi riseIn-light back-3">
                     
-                        <a href="/SeanCherngTW.github.io/tags/Python/">Python</a>
+                        <a href="/SeanCherngTW.github.io/tags/LeetCode/">LeetCode</a>
                     
-                        <a href="/SeanCherngTW.github.io/tags/網頁爬蟲/">網頁爬蟲</a>
+                        <a href="/SeanCherngTW.github.io/tags/Python/">Python</a>
                     
                     </div>
                 
@@ -225,50 +225,22 @@
         </header>
         <div class="post-content syuanpi riseIn-light back-3">
             
-                <p>環境: Python3.6
-首先要安裝</p>
-<ol>
-<li>selenium</li>
-<li><p>bs4</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ pip install selenium</div><div class="line">$ pip install bs4</div></pre></td></tr></table></figure>
-</li>
-<li><p><a href="https://sites.google.com/a/chromium.org/chromedriver/downloads" target="_blank" rel="external">ChromeDriver</a>(你也可以裝其他瀏覽器的Driver)</p>
-</li>
-</ol>
-<p>環境搞定後就開始寫程式吧！
-<a id="more"></a>
-首先你得要先匯入相關套件
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> selenium <span class="keyword">import</span> webdriver</div><div class="line"><span class="keyword">from</span> bs4 <span class="keyword">import</span> BeautifulSoup</div></pre></td></tr></table></figure></p>
-<p>告訴Selenium的Webdriver你要爬的網頁
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">browser = webdriver.Chrome()</div><div class="line">browser.get(<span class="string">'你要爬的網址'</span>)</div></pre></td></tr></table></figure></p>
-<p>現在可以執行看看程式，已經會開瀏覽器自動連到這個網站囉～</p>
-<p>再來你得透過Beautiful Soup去取得網頁原始碼
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">soup = BeautifulSoup(browser.page_source, <span class="string">"html.parser"</span>)</div></pre></td></tr></table></figure></p>
-<p>注意！如果你要爬的網頁有切成很多frame
-你會在原始碼看到類似這樣的東西
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">frame</span> <span class="attr">name</span>=<span class="string">"navigation"</span>&gt;</span></div><div class="line">...</div><div class="line"><span class="tag">&lt;/<span class="name">frame</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">frame</span> <span class="attr">name</span>=<span class="string">"home"</span>&gt;</span></div><div class="line">...</div><div class="line"><span class="tag">&lt;/<span class="name">frame</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<p>這時候請記得，一定要把webdriver切換到「你要抓的內容」所在的frame
-才有辦法抓到你要的東西
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">browser.switch_to.frame(<span class="string">'navigation'</span>)</div></pre></td></tr></table></figure></p>
-<p>或
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">browser.switch_to.frame(<span class="string">'home'</span>)</div></pre></td></tr></table></figure></p>
-<p>記得一件事情，如果你現在已經在navigation frame，想要切到home frame的話
-你是不能直接切換的，你得先切回預設frame，才能切到home frame
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 假設現在在navigation frame</span></div><div class="line"></div><div class="line"><span class="comment"># 切回預設frame</span></div><div class="line">browser.switch_to.default_content()</div><div class="line"><span class="comment"># 才能再切到其他frame</span></div><div class="line">browser.switch_to.frame(<span class="string">'home'</span>)</div></pre></td></tr></table></figure></p>
-<p>由於我們一般人在做網頁爬蟲時
-我們通常只會關心網頁的「內容」
-而對於網頁的樣式設定&lt;\style&gt;或是一些功能的實作&lt;\script&gt;並不是很在意
-所以我們可以先把&lt;\style&gt;和&lt;\script&gt;的標籤從剛剛取得的soup中移除
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> script <span class="keyword">in</span> soup([<span class="string">"script"</span>, <span class="string">"style"</span>]):</div><div class="line">    script.extract()</div></pre></td></tr></table></figure></p>
-<p>現在就可以正式開始取得我們要的資料囉～
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 找某一個tag</span></div><div class="line">data = soup.select(<span class="string">"tagname"</span>)</div><div class="line"><span class="comment"># 或你想逐層尋找</span></div><div class="line">data = soup.select(<span class="string">"html body title"</span>)</div><div class="line"></div><div class="line"><span class="comment"># 找某一個class</span></div><div class="line">data = soup.select(<span class="string">".classname"</span>)</div><div class="line"></div><div class="line"><span class="comment"># 找某一個id</span></div><div class="line">data = soup.select(<span class="string">"#idname"</span>)</div></pre></td></tr></table></figure></p>
-<p>你也可以用find()方法
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 回傳id=innerdiv的div tag</span></div><div class="line">data = soup.find(<span class="string">"div"</span>, &#123;<span class="string">"id"</span>, <span class="string">"innerdiv"</span>&#125;)</div><div class="line"></div><div class="line"><span class="comment"># 回傳所有id=innerdiv的div tag，預設會走訪每一層去找有沒有符合條件的tag</span></div><div class="line">datalist = soup.find_all(<span class="string">"div"</span>, &#123;<span class="string">"id"</span>, <span class="string">"innerdiv"</span>&#125;)</div><div class="line"></div><div class="line"><span class="comment"># 如果你只想針對第一層搜尋，不想去走訪每一層，你可以關掉recursive</span></div><div class="line">datalist = soup.find_all(<span class="string">"div"</span>, &#123;<span class="string">"id"</span>, <span class="string">"innerdiv"</span>&#125;, recursive=<span class="keyword">False</span>)</div></pre></td></tr></table></figure></p>
-<p>這些方法回傳的物件都會是&lt;\bs4.Element.Tag&gt;物件
-我們也可以存取這些物件的一些屬性，比如:
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 先判斷這個data有沒有class，他會存在list裡面，如果有的話再取出來</span></div><div class="line"><span class="keyword">if</span> isinstance(data.get(<span class="string">'class'</span>), list):</div><div class="line">    data.get(<span class="string">'class'</span>)[<span class="number">0</span>]</div><div class="line"></div><div class="line"><span class="comment"># 回傳這筆資料的tag</span></div><div class="line">data.name</div><div class="line"></div><div class="line"><span class="comment"># 回傳這筆資料的內文(可以想成拿掉所有標籤後剩下的文字)</span></div><div class="line">data.text</div></pre></td></tr></table></figure></p>
-<p>有些data.text印出來會有很多空白，要消除多餘的空白的話可以這樣做
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> re</div><div class="line">newdata = re.sub(<span class="string">'(\\r\\n|\\r|\\n)+'</span>, <span class="string">' '</span>, data.text)</div></pre></td></tr></table></figure></p>
+                <p><b>題目：</b><br>
+<a href="https://leetcode.com/problems/two-sum-iv-input-is-a-bst/description/" target="_blank" rel="external">653. Two Sum IV - Input is a BST</a><br>
+Given a Binary Search Tree and a target number, return true if there exist two elements in the BST such that their sum is equal to the given target.</p>
+<p><b>解釋：</b><br>
+輸入一棵二元搜尋樹(BST)與一個目標整數k，判斷能否在這個二元搜尋數中，找到兩個不相同節點之和為k<br></p>
+<p><b>思路：</b><br>
+首先準備一個集合(set)<br>
+再來遍歷整棵二元搜尋樹，對每一個節點的值val，判斷(val - k)有沒有在這個集合當中<br>
+若無，則將該節點的值存入集合中，並繼續遍歷<br>
+若有，則回傳True<br>
+若遍歷完整棵二元搜尋樹都沒有找到答案，則回傳False<br></p>
+<p><b>例子：</b><br>
+輸入：[5, 3, 6, 2, 4, 7] k=9
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">1. </div><div class="line">set = NULL</div><div class="line">(9-5) not in set</div><div class="line">set.insert(5)</div><div class="line"></div><div class="line">2.</div><div class="line">set = (5)</div><div class="line">(9-3) not in set</div><div class="line">set.insert(3)</div><div class="line"></div><div class="line">3.</div><div class="line">set = (5, 3)</div><div class="line">(9-6) in set</div><div class="line">return True</div></pre></td></tr></table></figure></p>
+<p><b>程式碼：</b><br>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * Definition for a binary tree node.</div><div class="line"> * struct TreeNode &#123;</div><div class="line"> *     int val;</div><div class="line"> *     TreeNode *left;</div><div class="line"> *     TreeNode *right;</div><div class="line"> *     TreeNode(int x) : val(x), left(NULL), right(NULL) &#123;&#125;</div><div class="line"> * &#125;;</div><div class="line"> */</div><div class="line">class Solution &#123;</div><div class="line">public:</div><div class="line">    unordered_set&lt;int&gt; s;</div><div class="line">    int target;</div><div class="line">    </div><div class="line">    bool findTarget(TreeNode* root, int k) &#123;</div><div class="line">        target = k;</div><div class="line">        return traversal(root);</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    bool traversal(TreeNode* node)&#123;</div><div class="line">        if(node == NULL)</div><div class="line">            return false;</div><div class="line">        if(s.count(target - node-&gt;val) &gt; 0)</div><div class="line">            return true;</div><div class="line">        </div><div class="line">        s.insert(node-&gt;val);</div><div class="line">        return traversal(node-&gt;left) || traversal(node-&gt;right);</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
 
             
         
@@ -282,12 +254,12 @@
         
     <nav class="article-page">
         
-            <a href="/SeanCherngTW.github.io/2017/10/07/LeetCode-107-Binary-Tree-Level-Order-Traversal-II/" id="art-left" class="art-right">
-                <span class="next-title">
-                    LeetCode - 107. Binary Tree Level Order Traversal II<i class="iconfont icon-right"></i> 
+        
+            <a href="/SeanCherngTW.github.io/2017/10/12/LeetCode-693-Binary-Number-with-Alternating-Bits/" id="art-right" class="art-left">
+                <span class="prev-title"> 
+                    <i class="iconfont icon-left"></i>LeetCode - 693. Binary Number with Alternating Bits
                 </span>
             </a>
-        
         
     </nav>
 
