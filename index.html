@@ -58,7 +58,7 @@
     <div class="tagcloud-mask"></div>  
 <div class="tagcloud" id="tagcloud">
     <div class="tagcloud-inner">
-        <a href="/SeanCherngTW.github.io/tags/C/" style="font-size: 14px;">C++</a> <a href="/SeanCherngTW.github.io/tags/LeetCode/" style="font-size: 14px;">LeetCode</a> <a href="/SeanCherngTW.github.io/tags/Python/" style="font-size: 14px;">Python</a> <a href="/SeanCherngTW.github.io/tags/網頁爬蟲/" style="font-size: 14px;">網頁爬蟲</a>
+        <a href="/SeanCherngTW.github.io/tags/C/" style="font-size: 14px;">C++</a> <a href="/SeanCherngTW.github.io/tags/LeetCode/" style="font-size: 14px;">LeetCode</a> <a href="/SeanCherngTW.github.io/tags/Python/" style="font-size: 14px;">Python</a> <a href="/SeanCherngTW.github.io/tags/李宏毅機器學習筆記/" style="font-size: 14px;">李宏毅機器學習筆記</a> <a href="/SeanCherngTW.github.io/tags/網頁爬蟲/" style="font-size: 14px;">網頁爬蟲</a>
     </div>
 </div>
     <header class="header" id="header">
@@ -166,7 +166,7 @@
                     </div>
                     <div class="mobile-nav-tagcloud">
                         <div class="mobile-tagcloud-inner">
-                            <a href="/SeanCherngTW.github.io/tags/C/" style="font-size: 14px;">C++</a> <a href="/SeanCherngTW.github.io/tags/LeetCode/" style="font-size: 14px;">LeetCode</a> <a href="/SeanCherngTW.github.io/tags/Python/" style="font-size: 14px;">Python</a> <a href="/SeanCherngTW.github.io/tags/網頁爬蟲/" style="font-size: 14px;">網頁爬蟲</a>
+                            <a href="/SeanCherngTW.github.io/tags/C/" style="font-size: 14px;">C++</a> <a href="/SeanCherngTW.github.io/tags/LeetCode/" style="font-size: 14px;">LeetCode</a> <a href="/SeanCherngTW.github.io/tags/Python/" style="font-size: 14px;">Python</a> <a href="/SeanCherngTW.github.io/tags/李宏毅機器學習筆記/" style="font-size: 14px;">李宏毅機器學習筆記</a> <a href="/SeanCherngTW.github.io/tags/網頁爬蟲/" style="font-size: 14px;">網頁爬蟲</a>
                         </div>
                     </div>
                 </div>
@@ -203,6 +203,97 @@
     
 
 <section class="posts">
+    
+        
+    <article class="post">
+        <header class="post-header">
+            <div class="post-time syuanpi riseIn-light back-1">
+                <span>August 19, 2019</span>
+                
+            </div>
+            <h1 class="post-title syuanpi riseIn-light back-2">
+            
+                <a href="/SeanCherngTW.github.io/2019/08/19/ML-Lecture-1-Regression-Case-Study/">ML Lecture 1: Regression - Case Study</a>
+            
+            </h1>
+            
+        </header>
+        <div class="post-content syuanpi riseIn-light back-3">
+            
+                
+                    <h3 id="ML三步驟"><a href="#ML三步驟" class="headerlink" title="ML三步驟"></a>ML三步驟</h3><ol>
+<li>準備一組function set（設計model）<ul>
+<li>可以把function set想成Model，不同的model代表不同function set</li>
+<li>同一個model代表同一個function set，參數中不同的weight和bias就代表同一個function set中不同的function</li>
+</ul>
+</li>
+<li>判斷function set中，每一個function的好壞<ul>
+<li>使用Loss function來判斷function的好壞<ul>
+<li>具體作法：把Training data的X作為輸入，計算function產出的y與實際的y相差多少，這個相差的值就稱為Loss（或error）</li>
+<li>Loss越低，代表此function對於training data的擬合度很高，但對於testing data卻不一定也是如此（可能overfitting）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>找出最佳的function<ul>
+<li>使用Gradient Descent來決定function中的weight應該要如何修正<ul>
+<li>function中會有很多參數（weight），對參數做偏微分後，即可得到該參數的斜率。將偏微分的結果（方向）乘上Learning rate（步伐），即可算出這個weight應該要增加或減少多少，目標是使Loss降到最低</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+                    
+            
+        
+            <p class="content-link">
+                <a href="/SeanCherngTW.github.io/2019/08/19/ML-Lecture-1-Regression-Case-Study/#more">
+                    <span class="iconfont icon-right">Read More...</span>
+                </a>
+            </p>
+        
+        </div>
+        
+    </article>
+    
+
+    
+        
+    <article class="post">
+        <header class="post-header">
+            <div class="post-time syuanpi riseIn-light back-1">
+                <span>August 19, 2019</span>
+                
+            </div>
+            <h1 class="post-title syuanpi riseIn-light back-2">
+            
+                <a href="/SeanCherngTW.github.io/2019/08/19/ML-Lecture-0-1-Introduction-of-Machine-Learning/">ML Lecture 0-1: Introduction of Machine Learning</a>
+            
+            </h1>
+            
+        </header>
+        <div class="post-content syuanpi riseIn-light back-3">
+            
+                
+                    <h3 id="AI-v-s-ML-v-s-DL"><a href="#AI-v-s-ML-v-s-DL" class="headerlink" title="AI v.s. ML v.s. DL"></a>AI v.s. ML v.s. DL</h3><ul>
+<li>AI是達到人工智慧的「目標」</li>
+<li>Machine Learning是達到AI的手段之一</li>
+<li>Deep Learning則是Machine Learning的方法之一</li>
+</ul>
+                    
+            
+        
+            <p class="content-link">
+                <a href="/SeanCherngTW.github.io/2019/08/19/ML-Lecture-0-1-Introduction-of-Machine-Learning/#more">
+                    <span class="iconfont icon-right">Read More...</span>
+                </a>
+            </p>
+        
+        </div>
+        
+    </article>
+    
+
     
         
     <article class="post">
@@ -441,7 +532,7 @@ Given a binary tree, return the bottom-up level order traversal of its nodes&#39
             <div class="copyright">
     <div class="info">
         <span>&copy;</span>
-        <span>2017 ~ 2018</span>
+        <span>2017 ~ 2019</span>
         <span>❤</span>
         <span>Sean Cherng</span>
     </div>
