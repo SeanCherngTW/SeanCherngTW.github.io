@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="">
 <head>
-    <title> LeetCode - 404. Sum of Left Leaves · Sean Chenrg's Blog </title>
+    <title> ML Lecture 3-1: Gradient Descent · Sean Chenrg's Blog </title>
     <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
@@ -17,7 +17,7 @@
 
 
 
-    <meta name="keywords" content="LeetCode, Python, Nlvi" />
+    <meta name="keywords" content="李宏毅機器學習, Nlvi" />
 
 <link rel="stylesheet" href="/SeanCherngTW.github.io/style/style.css">
 <script src="/SeanCherngTW.github.io/script/jquery.min.js"></script>
@@ -203,21 +203,19 @@
     <article class="post">
         <header class="post-header">
             <div class="post-time syuanpi riseIn-light back-1">
-                <span>October 12, 2017</span>
+                <span>August 19, 2019</span>
                 
             </div>
             <h1 class="post-title syuanpi riseIn-light back-2">
             
-                LeetCode - 404. Sum of Left Leaves
+                ML Lecture 3-1: Gradient Descent
             
             </h1>
             
                 
                     <div class="post-tags syuanpi riseIn-light back-3">
                     
-                        <a href="/SeanCherngTW.github.io/tags/LeetCode/">LeetCode</a>
-                    
-                        <a href="/SeanCherngTW.github.io/tags/Python/">Python</a>
+                        <a href="/SeanCherngTW.github.io/tags/李宏毅機器學習/">李宏毅機器學習</a>
                     
                     </div>
                 
@@ -225,21 +223,15 @@
         </header>
         <div class="post-content syuanpi riseIn-light back-3">
             
-                <p><b>題目：</b><br>
-<a href="https://leetcode.com/problems/sum-of-left-leaves/description/" target="_blank" rel="external">404. Sum of Left Leaves</a><br>
-Find the sum of all left leaves in a given binary tree.</p>
-<p><b>解釋：</b><br>
-輸入一棵樹，求出該樹所有「左葉子」值的加總</p>
-<p><b>思路：</b><br>
-遞迴走訪左右子樹，並記錄下每一棵子樹屬於左子樹還是右子樹，直到葉子為止，這時即可知道哪些是左葉子，哪些是右葉子。
-<a id="more"></a></p>
-<ol>
-<li>若該樹為空，或是該樹只有根節點，則直接回傳0（根節點不屬於左葉子）</li>
-<li>接下來遞迴走訪左右子樹，當走訪左子樹時傳入isLeft=True，反之傳入isLeft=False</li>
-<li>若已走訪到葉子（節點的左右子樹皆為空），則透過isLeft判斷該葉子是否為左葉子</li>
-<li>加總所有左葉子的值</li>
-</ol>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># Definition for a binary tree node.</span></div><div class="line"><span class="comment"># class TreeNode(object):</span></div><div class="line"><span class="comment">#     def __init__(self, x):</span></div><div class="line"><span class="comment">#         self.val = x</span></div><div class="line"><span class="comment">#         self.left = None</span></div><div class="line"><span class="comment">#         self.right = None</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></div><div class="line">    ans = <span class="number">0</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">sumOfLeftLeaves</span><span class="params">(self, root)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line"><span class="string">        :type root: TreeNode</span></div><div class="line"><span class="string">        :rtype: int</span></div><div class="line"><span class="string">        """</span></div><div class="line">        <span class="keyword">if</span> <span class="keyword">not</span> root <span class="keyword">or</span> (root.left == <span class="keyword">None</span> <span class="keyword">and</span> root.right == <span class="keyword">None</span>):</div><div class="line">            <span class="keyword">return</span> <span class="number">0</span></div><div class="line">        <span class="keyword">return</span> self.findLeaves(root.left, <span class="keyword">True</span>) + self.findLeaves(root.right, <span class="keyword">False</span>)</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">findLeaves</span><span class="params">(self, node, isLeft)</span>:</span></div><div class="line">        <span class="keyword">if</span> <span class="keyword">not</span> node:</div><div class="line">            <span class="keyword">return</span> self.ans</div><div class="line">        <span class="keyword">if</span> node.left == <span class="keyword">None</span> <span class="keyword">and</span> node.right == <span class="keyword">None</span>:</div><div class="line">            <span class="keyword">return</span> self.ans + node.val <span class="keyword">if</span> isLeft <span class="keyword">else</span> self.ans</div><div class="line">        <span class="keyword">return</span> self.findLeaves(node.left, <span class="keyword">True</span>) + self.findLeaves(node.right, <span class="keyword">False</span>)</div></pre></td></tr></table></figure>
+                <h4 id="Feature-Scaling"><a href="#Feature-Scaling" class="headerlink" title="Feature Scaling"></a>Feature Scaling</h4><ul>
+<li>把輸入的特徵的值範圍調整成一致</li>
+<li>可以想成標準化，平均=1、標準差=0</li>
+<li>如此一來在做Gradient Descent時，可以讓梯度以直線往最低點前進，讓各參數不需要客製化自己的Learning rate<a id="more"></a>
+<img src="https://i.imgur.com/a1wRUTz.png" alt=""></li>
+</ul>
+<h4 id="Adagrad與一階、二階導數"><a href="#Adagrad與一階、二階導數" class="headerlink" title="Adagrad與一階、二階導數"></a>Adagrad與一階、二階導數</h4><p><img src="https://i.imgur.com/QAaeqGs.jpg" alt=""></p>
+<h4 id="Gradient-Descent數學式"><a href="#Gradient-Descent數學式" class="headerlink" title="Gradient Descent數學式"></a>Gradient Descent數學式</h4><p><img src="https://i.imgur.com/Zrwvaqx.jpg" alt=""></p>
+
             
         
         </div>
@@ -252,16 +244,10 @@ Find the sum of all left leaves in a given binary tree.</p>
         
     <nav class="article-page">
         
-            <a href="/SeanCherngTW.github.io/2017/10/12/LeetCode-693-Binary-Number-with-Alternating-Bits/" id="art-left" class="art-right">
-                <span class="next-title">
-                    LeetCode - 693. Binary Number with Alternating Bits<i class="iconfont icon-right"></i> 
-                </span>
-            </a>
         
-        
-            <a href="/SeanCherngTW.github.io/2017/10/07/LeetCode-107-Binary-Tree-Level-Order-Traversal-II/" id="art-right" class="art-left">
+            <a href="/SeanCherngTW.github.io/2019/08/19/ML-Lecture-2-Where-does-the-error-come-from/" id="art-right" class="art-left">
                 <span class="prev-title"> 
-                    <i class="iconfont icon-left"></i>LeetCode - 107. Binary Tree Level Order Traversal II
+                    <i class="iconfont icon-left"></i>ML Lecture 2: Where does the error come from?
                 </span>
             </a>
         

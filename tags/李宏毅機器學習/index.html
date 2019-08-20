@@ -1,7 +1,11 @@
 <!DOCTYPE html>
 <html lang="">
 <head>
-    <title> LeetCode - 404. Sum of Left Leaves · Sean Chenrg's Blog </title>
+    <title>
+  
+    李宏毅機器學習 · Sean Chenrg's Blog
+  
+</title>
     <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
@@ -16,8 +20,6 @@
 
 
 
-
-    <meta name="keywords" content="LeetCode, Python, Nlvi" />
 
 <link rel="stylesheet" href="/SeanCherngTW.github.io/style/style.css">
 <script src="/SeanCherngTW.github.io/script/jquery.min.js"></script>
@@ -200,126 +202,36 @@
         <main class="main" id="main">
             
     
-    <article class="post">
-        <header class="post-header">
-            <div class="post-time syuanpi riseIn-light back-1">
-                <span>October 12, 2017</span>
-                
-            </div>
-            <h1 class="post-title syuanpi riseIn-light back-2">
-            
-                LeetCode - 404. Sum of Left Leaves
-            
-            </h1>
-            
-                
-                    <div class="post-tags syuanpi riseIn-light back-3">
-                    
-                        <a href="/SeanCherngTW.github.io/tags/LeetCode/">LeetCode</a>
-                    
-                        <a href="/SeanCherngTW.github.io/tags/Python/">Python</a>
-                    
-                    </div>
-                
-            
-        </header>
-        <div class="post-content syuanpi riseIn-light back-3">
-            
-                <p><b>題目：</b><br>
-<a href="https://leetcode.com/problems/sum-of-left-leaves/description/" target="_blank" rel="external">404. Sum of Left Leaves</a><br>
-Find the sum of all left leaves in a given binary tree.</p>
-<p><b>解釋：</b><br>
-輸入一棵樹，求出該樹所有「左葉子」值的加總</p>
-<p><b>思路：</b><br>
-遞迴走訪左右子樹，並記錄下每一棵子樹屬於左子樹還是右子樹，直到葉子為止，這時即可知道哪些是左葉子，哪些是右葉子。
-<a id="more"></a></p>
-<ol>
-<li>若該樹為空，或是該樹只有根節點，則直接回傳0（根節點不屬於左葉子）</li>
-<li>接下來遞迴走訪左右子樹，當走訪左子樹時傳入isLeft=True，反之傳入isLeft=False</li>
-<li>若已走訪到葉子（節點的左右子樹皆為空），則透過isLeft判斷該葉子是否為左葉子</li>
-<li>加總所有左葉子的值</li>
-</ol>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># Definition for a binary tree node.</span></div><div class="line"><span class="comment"># class TreeNode(object):</span></div><div class="line"><span class="comment">#     def __init__(self, x):</span></div><div class="line"><span class="comment">#         self.val = x</span></div><div class="line"><span class="comment">#         self.left = None</span></div><div class="line"><span class="comment">#         self.right = None</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></div><div class="line">    ans = <span class="number">0</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">sumOfLeftLeaves</span><span class="params">(self, root)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line"><span class="string">        :type root: TreeNode</span></div><div class="line"><span class="string">        :rtype: int</span></div><div class="line"><span class="string">        """</span></div><div class="line">        <span class="keyword">if</span> <span class="keyword">not</span> root <span class="keyword">or</span> (root.left == <span class="keyword">None</span> <span class="keyword">and</span> root.right == <span class="keyword">None</span>):</div><div class="line">            <span class="keyword">return</span> <span class="number">0</span></div><div class="line">        <span class="keyword">return</span> self.findLeaves(root.left, <span class="keyword">True</span>) + self.findLeaves(root.right, <span class="keyword">False</span>)</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">findLeaves</span><span class="params">(self, node, isLeft)</span>:</span></div><div class="line">        <span class="keyword">if</span> <span class="keyword">not</span> node:</div><div class="line">            <span class="keyword">return</span> self.ans</div><div class="line">        <span class="keyword">if</span> node.left == <span class="keyword">None</span> <span class="keyword">and</span> node.right == <span class="keyword">None</span>:</div><div class="line">            <span class="keyword">return</span> self.ans + node.val <span class="keyword">if</span> isLeft <span class="keyword">else</span> self.ans</div><div class="line">        <span class="keyword">return</span> self.findLeaves(node.left, <span class="keyword">True</span>) + self.findLeaves(node.right, <span class="keyword">False</span>)</div></pre></td></tr></table></figure>
-            
+    <div class="archive syuanpi riseIn-light" id="archive">
         
+            <h2 class="archive-title"> now in </h2>
+            <span class="archive-name"> — 李宏毅機器學習</span>
+        
+        <div class="archive-list">
+            <ul>
+        
+            
+            
+            <li class="archive-post">
+                <span class="archive-post-time">
+                
+                    2019-08-19
+                
+                </span>
+                <span class="archive-post-link">
+                    <a href="/SeanCherngTW.github.io/2019/08/19/ML-Lecture-3-1-Gradient-Descent/">ML Lecture 3-1: Gradient Descent</a>
+                </span>
+            </li>
+
+        
+            </ul>
         </div>
-        
-            
-            
-        
-    </article>
+    </div>
     
-        
-    <nav class="article-page">
-        
-            <a href="/SeanCherngTW.github.io/2017/10/12/LeetCode-693-Binary-Number-with-Alternating-Bits/" id="art-left" class="art-right">
-                <span class="next-title">
-                    LeetCode - 693. Binary Number with Alternating Bits<i class="iconfont icon-right"></i> 
-                </span>
-            </a>
-        
-        
-            <a href="/SeanCherngTW.github.io/2017/10/07/LeetCode-107-Binary-Tree-Level-Order-Traversal-II/" id="art-right" class="art-left">
-                <span class="prev-title"> 
-                    <i class="iconfont icon-left"></i>LeetCode - 107. Binary Tree Level Order Traversal II
-                </span>
-            </a>
-        
+    <nav class="pagination">
+        <span class="page-number current">1</span>
     </nav>
 
-        
-    <i id="com-switch" class="iconfont icon-more jumping-in long infinite" style="font-size:24px;display:block;text-align:center;transform:rotate(180deg);"></i>
-    <div class="post-comments" id="post-comments" style="display: block;margin: auto 16px;">
-        
-        
-<!-- Gitment Comments -->
-<div id="gitment"></div>
-<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
-<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
-<script>
-var gitment = new Gitment({
-  owner: "",
-  repo: '',
-  oauth: {
-    client_id: '',
-    client_secret: '',
-  },
-})
-gitment.render('gitment')
-</script>
-
-        
-<!-- SOHUCS Comments -->
-<div id="SOHUCS"></div> 
-<script type="text/javascript"> 
-(function(){ 
-var appid = '';
-var conf = '';
-var width = window.innerWidth || document.documentElement.clientWidth; 
-if (width < 960) { 
-window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="http://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("http://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})}); } })(); </script>
-
-        
-<!-- Disqus Comments -->
-<div id="disqus_thread">
-    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-</div>
-<script type="text/javascript">
-    var disqus_shortname = 'SeanCherngTW';
-
-    (function(){
-        var dsq = document.createElement('script');
-        dsq.type = 'text/javascript';
-        dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    }());
-</script>
-
-
-    </div>
-
-    
 
 
         </main>
@@ -387,8 +299,6 @@ $(document).ready(function(){
 })
 </script>
     </div>
-    
-        
     
     <div class="backtop syuanpi dead toTop" id="backtop">
     <i class="iconfont icon-up"></i>
