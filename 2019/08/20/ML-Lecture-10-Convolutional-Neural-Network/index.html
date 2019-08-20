@@ -1,11 +1,7 @@
 <!DOCTYPE html>
 <html lang="">
 <head>
-    <title>
-  
-    李宏毅機器學習 · Sean Chenrg's Blog
-  
-</title>
+    <title> ML Lecture 10: Convolutional Neural Network · Sean Chenrg's Blog </title>
     <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
@@ -20,6 +16,8 @@
 
 
 
+
+    <meta name="keywords" content="李宏毅機器學習, Nlvi" />
 
 <link rel="stylesheet" href="/SeanCherngTW.github.io/style/style.css">
 <script src="/SeanCherngTW.github.io/script/jquery.min.js"></script>
@@ -202,50 +200,131 @@
         <main class="main" id="main">
             
     
-    <div class="archive syuanpi riseIn-light" id="archive">
-        
-            <h2 class="archive-title"> now in </h2>
-            <span class="archive-name"> — 李宏毅機器學習</span>
-        
-        <div class="archive-list">
-            <ul>
-        
-            
-            
-            <li class="archive-post">
-                <span class="archive-post-time">
+    <article class="post">
+        <header class="post-header">
+            <div class="post-time syuanpi riseIn-light back-1">
+                <span>August 20, 2019</span>
                 
-                    2019-08-20
+            </div>
+            <h1 class="post-title syuanpi riseIn-light back-2">
+            
+                ML Lecture 10: Convolutional Neural Network
+            
+            </h1>
+            
                 
-                </span>
-                <span class="archive-post-link">
-                    <a href="/SeanCherngTW.github.io/2019/08/20/ML-Lecture-10-Convolutional-Neural-Network/">ML Lecture 10: Convolutional Neural Network</a>
-                </span>
-            </li>
+                    <div class="post-tags syuanpi riseIn-light back-3">
+                    
+                        <a href="/SeanCherngTW.github.io/tags/李宏毅機器學習/">李宏毅機器學習</a>
+                    
+                    </div>
+                
+            
+        </header>
+        <div class="post-content syuanpi riseIn-light back-3">
+            
+                <h4 id="圖像辨識使用CNN"><a href="#圖像辨識使用CNN" class="headerlink" title="圖像辨識使用CNN"></a>圖像辨識使用CNN</h4><ul>
+<li>需要辨識的物體可能只佔了圖片的某一小塊（Convolution）</li>
+<li>同樣的pattern在圖片中的不同地方仍然代表一樣的意思（Convolution）</li>
+<li>圖片縮小後，仍然可以輕易地分辨出圖片中的物體（pooling）</li>
+</ul>
+<a id="more"></a>
+<h4 id="CNN"><a href="#CNN" class="headerlink" title="CNN"></a>CNN</h4><ul>
+<li><p>Convolution &amp; Filters</p>
+<ul>
+<li>Filter代表你想要辨識的物體細節（E.g.紋路、筆跡、形狀等）</li>
+<li>Filter會掃過整張圖片並對圖片的每一塊做內積，內積結果大的那一塊代表該處有我們想要辨識的物體</li>
+<li>做內積的過程就叫做Convolution</li>
+<li>多個Filters可以幫助我們辨識多個物體片段，進而拼湊出整個物體的形狀（例如：辨識數字5，某些Filters辨識橫槓、有些Filters辨識直槓、有些辨識圓弧等等，最後根據位置即可拼湊出這個數字是不是代表5）</li>
+<li>Filters的參數數量為&quot;Filters長 x Filters寬 x Channel數量&quot;，和原始圖片大小無關，因為Filter在掃過整個圖片時，他的weight是共用的
+<img src="https://i.imgur.com/gHxt26E.jpg" alt=""></li>
+</ul>
+</li>
+<li><p>MaxPooling</p>
+<ul>
+<li>根據圖片縮小後不變的特性，可以使用maxpooling來保留我們要辨識的目標物並丟棄其他不重要的pixel，讓機器在後續的處理上能更集中在目標物上</li>
+</ul>
+</li>
+</ul>
+<h4 id="CNN-Learning"><a href="#CNN-Learning" class="headerlink" title="CNN Learning"></a>CNN Learning</h4><ul>
+<li>用gradient acsent找到一個x，使得他被Filter所啟動的範圍最大（內積的值越大）</li>
+<li>找到這樣的x目的是，讓下層的Convolution layer可以得到較接近目標物的圖片</li>
+</ul>
 
-        
             
-            
-            <li class="archive-post">
-                <span class="archive-post-time">
-                
-                    2019-08-19
-                
-                </span>
-                <span class="archive-post-link">
-                    <a href="/SeanCherngTW.github.io/2019/08/19/ML-Lecture-3-1-Gradient-Descent/">ML Lecture 3-1: Gradient Descent</a>
-                </span>
-            </li>
-
         
-            </ul>
         </div>
-    </div>
+        
+            
+            
+        
+    </article>
     
-    <nav class="pagination">
-        <span class="page-number current">1</span>
+        
+    <nav class="article-page">
+        
+        
+            <a href="/SeanCherngTW.github.io/2019/08/19/ML-Lecture-3-1-Gradient-Descent/" id="art-right" class="art-left">
+                <span class="prev-title"> 
+                    <i class="iconfont icon-left"></i>ML Lecture 3-1: Gradient Descent
+                </span>
+            </a>
+        
     </nav>
 
+        
+    <i id="com-switch" class="iconfont icon-more jumping-in long infinite" style="font-size:24px;display:block;text-align:center;transform:rotate(180deg);"></i>
+    <div class="post-comments" id="post-comments" style="display: block;margin: auto 16px;">
+        
+        
+<!-- Gitment Comments -->
+<div id="gitment"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+var gitment = new Gitment({
+  owner: "",
+  repo: '',
+  oauth: {
+    client_id: '',
+    client_secret: '',
+  },
+})
+gitment.render('gitment')
+</script>
+
+        
+<!-- SOHUCS Comments -->
+<div id="SOHUCS"></div> 
+<script type="text/javascript"> 
+(function(){ 
+var appid = '';
+var conf = '';
+var width = window.innerWidth || document.documentElement.clientWidth; 
+if (width < 960) { 
+window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="http://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("http://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})}); } })(); </script>
+
+        
+<!-- Disqus Comments -->
+<div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+<script type="text/javascript">
+    var disqus_shortname = 'SeanCherngTW';
+
+    (function(){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+    </div>
+
+    
 
 
         </main>
@@ -313,6 +392,8 @@ $(document).ready(function(){
 })
 </script>
     </div>
+    
+        
     
     <div class="backtop syuanpi dead toTop" id="backtop">
     <i class="iconfont icon-up"></i>
