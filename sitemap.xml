@@ -2,9 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://seancherngtw.github.io/SeanCherngTW.github.io/2019/08/19/ML-Lecture-3-1-Gradient-Descent/</loc>
+    
+    <lastmod>2019-08-20T15:27:21.441Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://seancherngtw.github.io/SeanCherngTW.github.io/2019/08/20/ML-Lecture-10-Convolutional-Neural-Network/</loc>
     
-    <lastmod>2019-08-20T15:25:27.018Z</lastmod>
+    <lastmod>2019-08-20T15:27:01.335Z</lastmod>
     
   </url>
   
@@ -12,13 +19,6 @@
     <loc>https://seancherngtw.github.io/SeanCherngTW.github.io/2019/08/19/ML-Lecture-2-Where-does-the-error-come-from/</loc>
     
     <lastmod>2019-08-19T16:02:59.828Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://seancherngtw.github.io/SeanCherngTW.github.io/2019/08/19/ML-Lecture-3-1-Gradient-Descent/</loc>
-    
-    <lastmod>2019-08-19T16:02:37.949Z</lastmod>
     
   </url>
   
