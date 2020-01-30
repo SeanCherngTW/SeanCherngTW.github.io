@@ -58,7 +58,7 @@
     <div class="tagcloud-mask"></div>  
 <div class="tagcloud" id="tagcloud">
     <div class="tagcloud-inner">
-        <a href="/SeanCherngTW.github.io/tags/Python/" style="font-size: 14px;">Python</a> <a href="/SeanCherngTW.github.io/tags/李宏毅機器學習筆記/" style="font-size: 14px;">李宏毅機器學習筆記</a> <a href="/SeanCherngTW.github.io/tags/網頁爬蟲/" style="font-size: 14px;">網頁爬蟲</a>
+        <a href="/SeanCherngTW.github.io/tags/Backend/" style="font-size: 14px;">Backend</a> <a href="/SeanCherngTW.github.io/tags/Python/" style="font-size: 14px;">Python</a> <a href="/SeanCherngTW.github.io/tags/TensorFlow/" style="font-size: 14px;">TensorFlow</a> <a href="/SeanCherngTW.github.io/tags/李宏毅機器學習筆記/" style="font-size: 14px;">李宏毅機器學習筆記</a> <a href="/SeanCherngTW.github.io/tags/深度學習/" style="font-size: 14px;">深度學習</a> <a href="/SeanCherngTW.github.io/tags/網頁爬蟲/" style="font-size: 14px;">網頁爬蟲</a>
     </div>
 </div>
     <header class="header" id="header">
@@ -166,7 +166,7 @@
                     </div>
                     <div class="mobile-nav-tagcloud">
                         <div class="mobile-tagcloud-inner">
-                            <a href="/SeanCherngTW.github.io/tags/Python/" style="font-size: 14px;">Python</a> <a href="/SeanCherngTW.github.io/tags/李宏毅機器學習筆記/" style="font-size: 14px;">李宏毅機器學習筆記</a> <a href="/SeanCherngTW.github.io/tags/網頁爬蟲/" style="font-size: 14px;">網頁爬蟲</a>
+                            <a href="/SeanCherngTW.github.io/tags/Backend/" style="font-size: 14px;">Backend</a> <a href="/SeanCherngTW.github.io/tags/Python/" style="font-size: 14px;">Python</a> <a href="/SeanCherngTW.github.io/tags/TensorFlow/" style="font-size: 14px;">TensorFlow</a> <a href="/SeanCherngTW.github.io/tags/李宏毅機器學習筆記/" style="font-size: 14px;">李宏毅機器學習筆記</a> <a href="/SeanCherngTW.github.io/tags/深度學習/" style="font-size: 14px;">深度學習</a> <a href="/SeanCherngTW.github.io/tags/網頁爬蟲/" style="font-size: 14px;">網頁爬蟲</a>
                         </div>
                     </div>
                 </div>
@@ -203,6 +203,72 @@
     
 
 <section class="posts">
+    
+        
+    <article class="post">
+        <header class="post-header">
+            <div class="post-time syuanpi riseIn-light back-1">
+                <span>January 30, 2020</span>
+                
+            </div>
+            <h1 class="post-title syuanpi riseIn-light back-2">
+            
+                <a href="/SeanCherngTW.github.io/2020/01/30/三種RNN-Cell之output和state差異/">三種RNN Cell之output和state的差異</a>
+            
+            </h1>
+            
+        </header>
+        <div class="post-content syuanpi riseIn-light back-3">
+            
+                
+                    <h3 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h3><p>我們在使用TensorFlow建立RNN架構時，會看到dynamic_rnn()的輸出有兩個，一個是outputs，另一個是state：
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># create a BasicRNNCell</span></div><div class="line">rnn_cell = tf.compat.v1.nn.rnn_cell.BasicRNNCell(hidden_size)</div><div class="line"></div><div class="line"><span class="comment"># 'outputs' is a tensor of shape [batch_size, max_time, cell_state_size]</span></div><div class="line"></div><div class="line"><span class="comment"># defining initial state</span></div><div class="line">initial_state = rnn_cell.zero_state(batch_size, dtype=tf.float32)</div><div class="line"></div><div class="line"><span class="comment"># 'state' is a tensor of shape [batch_size, cell_state_size]</span></div><div class="line">outputs, state = tf.compat.v1.nn.dynamic_rnn(rnn_cell, input_data,</div><div class="line">                                   initial_state=initial_state,</div><div class="line">                                   dtype=tf.float32)</div></pre></td></tr></table></figure></p>
+<p>有些網路上的教學會說output和state是相同的，但實際用起來好像有時候也不相同，所以就讓我們來從三種RNN Cell的角度來分析一下。</p>
+                    
+            
+        
+            <p class="content-link">
+                <a href="/SeanCherngTW.github.io/2020/01/30/三種RNN-Cell之output和state差異/#more">
+                    <span class="iconfont icon-right">Read More...</span>
+                </a>
+            </p>
+        
+        </div>
+        
+    </article>
+    
+
+    
+        
+    <article class="post">
+        <header class="post-header">
+            <div class="post-time syuanpi riseIn-light back-1">
+                <span>January 30, 2020</span>
+                
+            </div>
+            <h1 class="post-title syuanpi riseIn-light back-2">
+            
+                <a href="/SeanCherngTW.github.io/2020/01/30/使用TensorFlow-SavedModel優雅地將模型部署至Flask/">使用TensorFlow SavedModel簡潔地將模型部署至Flask</a>
+            
+            </h1>
+            
+        </header>
+        <div class="post-content syuanpi riseIn-light back-3">
+            
+                
+                    <p></p><h3>Introduction</h3>
+我們設計好並訓練完一個深度學習模型後，除了在開發工具上測試它的效能之外，我們可能也希望能將訓練好的模型部署在網站上，開放給一般人使用。具體來說，我們會使用Django或Flask等工具，將模型的<p></p>
+<p></p><h3>使用Saver載入模型</h3>
+假設一個簡單的TensorFlow計算圖如下<p></p>
+
+                
+            
+        
+        </div>
+        
+    </article>
+    
+
     
         
     <article class="post">
@@ -472,7 +538,7 @@
             <div class="copyright">
     <div class="info">
         <span>&copy;</span>
-        <span>2017 ~ 2019</span>
+        <span>2017 ~ 2020</span>
         <span>❤</span>
         <span>Sean Cherng</span>
     </div>
