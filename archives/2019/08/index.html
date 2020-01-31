@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="">
 <head>
-    <title>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><title>
   
     Archives · Sean Chenrg's Blog
   
@@ -39,7 +39,7 @@
 
 
 
-    <link rel="stylesheet" href="/SeanCherngTW.github.io/syuanpi/syuanpi.min.css">
+    <link rel="stylesheet" href="/SeanCherngTW.github.io/syuanpi/syuanpi.min.css"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 
 
@@ -52,7 +52,7 @@
 
 </head>
 <body>
-    <div class="progress">
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="progress">
     <div class="progress-inner"></div>
 </div>
     <div class="body">
@@ -407,7 +407,24 @@ $(document).ready(function(){
     $(document).ready(function(){
         Nlvi.search();
     });
-    </script>
+    </script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
 
 </body>
 </html>
