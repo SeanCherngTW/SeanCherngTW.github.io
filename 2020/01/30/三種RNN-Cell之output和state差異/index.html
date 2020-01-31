@@ -1,231 +1,68 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html lang="">
 <head>
-    <!-- hexo-inject:begin --><!-- hexo-inject:end --><title> 三種RNN Cell之output和state的差異 · Sean Chenrg's Blog </title>
-    <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-<meta name="browsermode" content="application">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="Sean Chenrg's Blog">
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="msapplication-navbutton-color" content="#666666">
-<meta name= "format-detection" content="telephone=no" />
-<meta name="keywords" content="nlvi, Nlvi" />
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+  
+  <title>三種RNN Cell之output和state的差異 | Sean Chenrg&#39;s Blog</title>
+  <meta name="author" content="Sean Cherng">
+  
+  <meta name="description" content="Introduction我們在使用TensorFlow建立RNN架構時，會看到dynamic_rnn()的輸出有兩個，一個是outputs，另一個是state：123456789101112# create a BasicRNNCellrnn_cell = tf.compat.v1.nn.rnn_cell.BasicRNNCell(hidden_size)# &#39;outputs&#39; is a tensor of shape [batch_size, max_time, cell_state_size]# defining initial stateinitial_state = rnn_cell.zero_state(batch_size, dtype=tf.float32)# &#39;state&#39; is a tensor of shape [batch_size, cell_state_size]outputs, state = tf.compat.v1.nn.dynamic_rnn(rnn_cell, input_data,                                   initial_state=initial_state,                                   dtype=tf.float32)
+有些網路上的教學會說output和state是相同的，但實際用起來好像有時候也不相同，所以就讓我們來從三種RNN Cell的角度來分析一下。">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
+  <meta property="og:title" content="三種RNN Cell之output和state的差異"/>
+  <meta property="og:site_name" content="Sean Chenrg&#39;s Blog"/>
 
+  
+    <meta property="og:image" content=""/>
+  
 
-
-
-    <meta name="keywords" content="TensorFlow, 深度學習, Nlvi" />
-
-<link rel="stylesheet" href="/SeanCherngTW.github.io/style/style.css">
-<script src="/SeanCherngTW.github.io/script/jquery.min.js"></script>
-<script>
-    var CONFIG = {
-        title: "Sean Chenrg's Blog",
-        author: "Sean Cherng",
-        lightbox: true,
-        animate: true
-    }
-</script>
-
-
-
-    <link rel="stylesheet" href="/SeanCherngTW.github.io/lightbox/css/lightbox.min.css">
-
-
-
-
-    <link rel="stylesheet" href="/SeanCherngTW.github.io/syuanpi/syuanpi.min.css"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
-
-
-
-
-
-
-
-
-
+  <link href="/SeanCherngTW.github.io/favicon.png" rel="icon">
+  <link rel="alternate" href="/SeanCherngTW.github.io/atom.xml" title="Sean Chenrg&#39;s Blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/SeanCherngTW.github.io/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
 
 </head>
+
+
 <body>
-    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="progress">
-    <div class="progress-inner"></div>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/SeanCherngTW.github.io/">Sean Chenrg&#39;s Blog</a></h1>
+  <h2><a href="/SeanCherngTW.github.io/"></a></h2>
 </div>
-    <div class="body">
-    <div class="tagcloud-mask"></div>  
-<div class="tagcloud" id="tagcloud">
-    <div class="tagcloud-inner">
-        <a href="/SeanCherngTW.github.io/tags/Jupyter-Notebook/" style="font-size: 14px;">Jupyter Notebook</a> <a href="/SeanCherngTW.github.io/tags/Python/" style="font-size: 14px;">Python</a> <a href="/SeanCherngTW.github.io/tags/TensorFlow/" style="font-size: 14px;">TensorFlow</a> <a href="/SeanCherngTW.github.io/tags/李宏毅機器學習筆記/" style="font-size: 14px;">李宏毅機器學習筆記</a> <a href="/SeanCherngTW.github.io/tags/深度學習/" style="font-size: 14px;">深度學習</a> <a href="/SeanCherngTW.github.io/tags/網頁爬蟲/" style="font-size: 14px;">網頁爬蟲</a>
-    </div>
-</div>
-    <header class="header" id="header">
-    <div class="title syuanpi tvIn">
-    <div class="table">
-        <div class="connect">
-            <div class="connect-inner">
-                <span><a href="/">Sean Chenrg's Blog</a></span>
-                
-            </div>
-        </div>
-    </div>
-</div>
-    <nav class="main-nav syuanpi tvIn">
-<div class="table">
-
-    <ul class="menu">
-        
-        <li class="menu-item">
-            <a href="javascript:;" id="search">
-                <span>Search</span>
-                
-                
-            </a>
-        </li>
-        
-        
-        
-            <li class="menu-item">
-                <a href="/SeanCherngTW.github.io/">
-                    <span>Article</span>
-                    
-                    
-                </a>
-            </li>
-        
-        
-        
-            <li class="menu-item">
-                <a href="/SeanCherngTW.github.io/archives">
-                    <span>Archives</span>
-                    
-                    
-                </a>
-            </li>
-        
-        
-        
-            <li class="menu-item">
-                <a href="javascript:;" id="tags">
-                    <span>Tags</span>
-                    
-                    
-                </a>
-            </li>
-        
-        
-        
-            <li class="menu-item">
-                <a href="https://github.com/SeanCherngTW">
-                    <span>About</span>
-                    
-                    
-                </a>
-            </li>
-        
-        
-    </ul>
-
-</div>
-</nav>
-</header>
-<div class="mobile-header">
-    <div class="mobile-header-body">
-        <div class="mobile-header-list">
-            
-            
-                <div class="mobile-nav-item">
-                    <a href="/SeanCherngTW.github.io/">
-                        <span>Article</span>
-                        
-                        
-                    </a>
-                </div>
-            
-            
-            
-                <div class="mobile-nav-item">
-                    <a href="/SeanCherngTW.github.io/archives">
-                        <span>Archives</span>
-                        
-                        
-                    </a>
-                </div>
-            
-            
-            
-                <div class="mobile-nav-item inner-cloud">
-                    <div class="mobile-nav-tag">
-                        <a href="javascript:;" id="mobile-tags">
-                            <span>Tags</span>
-                            
-                            
-                        </a>
-                    </div>
-                    <div class="mobile-nav-tagcloud">
-                        <div class="mobile-tagcloud-inner">
-                            <a href="/SeanCherngTW.github.io/tags/Jupyter-Notebook/" style="font-size: 14px;">Jupyter Notebook</a> <a href="/SeanCherngTW.github.io/tags/Python/" style="font-size: 14px;">Python</a> <a href="/SeanCherngTW.github.io/tags/TensorFlow/" style="font-size: 14px;">TensorFlow</a> <a href="/SeanCherngTW.github.io/tags/李宏毅機器學習筆記/" style="font-size: 14px;">李宏毅機器學習筆記</a> <a href="/SeanCherngTW.github.io/tags/深度學習/" style="font-size: 14px;">深度學習</a> <a href="/SeanCherngTW.github.io/tags/網頁爬蟲/" style="font-size: 14px;">網頁爬蟲</a>
-                        </div>
-                    </div>
-                </div>
-            
-            
-            
-                <div class="mobile-nav-item">
-                    <a href="https://github.com/SeanCherngTW">
-                        <span>About</span>
-                        
-                        
-                    </a>
-                </div>
-            
-            
-        </div>
-    </div>
-    <div class="mobile-header-nav">
-        <div class="mobile-header-item" id="mobile-left">
-            <div class="header-menu-item">
-                <span class="header-menu-line"></span>
-            </div>
-        </div>
-        <h1 class="mobile-header-title">
-            <a href="/">Sean Chenrg's Blog</a>
-        </h1>
-        <div class="mobile-header-item"></div>
-    </div>
-</div>
-
-    <div class="container">
-        <main class="main" id="main">
-            
+<nav id="main-nav" class="alignright">
+  <ul>
     
-    <article class="post">
-        <header class="post-header">
-            <div class="post-time syuanpi riseIn-light back-1">
-                <span>January 30, 2020</span>
-                
-            </div>
-            <h1 class="post-title syuanpi riseIn-light back-2">
-            
-                三種RNN Cell之output和state的差異
-            
-            </h1>
-            
-                
-                    <div class="post-tags syuanpi riseIn-light back-3">
-                    
-                        <a href="/SeanCherngTW.github.io/tags/TensorFlow/">TensorFlow</a>
-                    
-                        <a href="/SeanCherngTW.github.io/tags/深度學習/">深度學習</a>
-                    
-                    </div>
-                
-            
-        </header>
-        <div class="post-content syuanpi riseIn-light back-3">
-            
-                <h3 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h3><p>我們在使用TensorFlow建立RNN架構時，會看到dynamic_rnn()的輸出有兩個，一個是outputs，另一個是state：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># create a BasicRNNCell</span></div><div class="line">rnn_cell = tf.compat.v1.nn.rnn_cell.BasicRNNCell(hidden_size)</div><div class="line"></div><div class="line"><span class="comment"># 'outputs' is a tensor of shape [batch_size, max_time, cell_state_size]</span></div><div class="line"></div><div class="line"><span class="comment"># defining initial state</span></div><div class="line">initial_state = rnn_cell.zero_state(batch_size, dtype=tf.float32)</div><div class="line"></div><div class="line"><span class="comment"># 'state' is a tensor of shape [batch_size, cell_state_size]</span></div><div class="line">outputs, state = tf.compat.v1.nn.dynamic_rnn(rnn_cell, input_data,</div><div class="line">                                   initial_state=initial_state,</div><div class="line">                                   dtype=tf.float32)</div></pre></td></tr></table></figure></p>
+      <li><a href="/SeanCherngTW.github.io/">Home</a></li>
+    
+      <li><a href="/SeanCherngTW.github.io/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article id="post-三種RNN-Cell之output和state差異" class="h-entry post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time class="dt-published" datetime="2020-01-30T13:18:33.000Z"><a href="/SeanCherngTW.github.io/2020/01/30/三種RNN-Cell之output和state差異/">2020-01-30</a></time>
+      
+      
+  
+    <h1 class="p-name title" itemprop="headline name">三種RNN Cell之output和state的差異</h1>
+  
+
+    </header>
+    <div class="e-content entry" itemprop="articleBody">
+      
+        <h3 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h3><p>我們在使用TensorFlow建立RNN架構時，會看到dynamic_rnn()的輸出有兩個，一個是outputs，另一個是state：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># create a BasicRNNCell</span></div><div class="line">rnn_cell = tf.compat.v1.nn.rnn_cell.BasicRNNCell(hidden_size)</div><div class="line"></div><div class="line"><span class="comment"># 'outputs' is a tensor of shape [batch_size, max_time, cell_state_size]</span></div><div class="line"></div><div class="line"><span class="comment"># defining initial state</span></div><div class="line">initial_state = rnn_cell.zero_state(batch_size, dtype=tf.float32)</div><div class="line"></div><div class="line"><span class="comment"># 'state' is a tensor of shape [batch_size, cell_state_size]</span></div><div class="line">outputs, state = tf.compat.v1.nn.dynamic_rnn(rnn_cell, input_data,</div><div class="line">                                   initial_state=initial_state,</div><div class="line">                                   dtype=tf.float32)</div></pre></td></tr></table></figure></p>
 <p>有些網路上的教學會說output和state是相同的，但實際用起來好像有時候也不相同，所以就讓我們來從三種RNN Cell的角度來分析一下。</p>
 <a id="more"></a>
 <h3 id="Basic-RNN-Cell"><a href="#Basic-RNN-Cell" class="headerlink" title="Basic RNN Cell"></a>Basic RNN Cell</h3><p>最簡單的RNN Cell如圖：<br><br></p>
@@ -273,183 +110,131 @@
 </ul>
 <h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><p><a href="https://zhuanlan.zhihu.com/p/28919765" target="_blank" rel="external">学会区分 RNN 的 output 和 state</a><br><a href="https://www.tensorflow.org/api_docs/python/tf/compat/v1/nn/dynamic_rnn" target="_blank" rel="external">dynamic_rnn()官方文件</a></p>
 
-            
-        
-        </div>
-        
-            
-            
-        
-    </article>
-    
-        
-    <nav class="article-page">
-        
-            <a href="/SeanCherngTW.github.io/2020/01/31/透過ssh設定遠端Jupyter-Notebook/" id="art-left" class="art-right">
-                <span class="next-title">
-                    透過ssh設定遠端Jupyter Notebook<i class="iconfont icon-right"></i> 
-                </span>
-            </a>
+      
+    </div>
+    <footer>
+      
         
         
-            <a href="/SeanCherngTW.github.io/2019/08/20/ML-Lecture-10-Convolutional-Neural-Network/" id="art-right" class="art-left">
-                <span class="prev-title"> 
-                    <i class="iconfont icon-left"></i>ML Lecture 10: Convolutional Neural Network
-                </span>
-            </a>
-        
-    </nav>
+  
+  <div class="tags">
+    <a href="/SeanCherngTW.github.io/tags/深度學習/">深度學習</a>, <a href="/SeanCherngTW.github.io/tags/TensorFlow/">TensorFlow</a>
+  </div>
 
         
-    <i id="com-switch" class="iconfont icon-more jumping-in long infinite" style="font-size:24px;display:block;text-align:center;transform:rotate(180deg);"></i>
-    <div class="post-comments" id="post-comments" style="display: block;margin: auto 16px;">
-        
-        
-<!-- Gitment Comments -->
-<div id="gitment"></div>
-<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
-<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">Kommentare</h1>
+
+  
+      <div id="fb-root"></div>
 <script>
-var gitment = new Gitment({
-  owner: "",
-  repo: '',
-  oauth: {
-    client_id: '',
-    client_secret: '',
-  },
-})
-gitment.render('gitment')
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
 </script>
 
-        
-<!-- SOHUCS Comments -->
-<div id="SOHUCS"></div> 
-<script type="text/javascript"> 
-(function(){ 
-var appid = '';
-var conf = '';
-var width = window.innerWidth || document.documentElement.clientWidth; 
-if (width < 960) { 
-window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="http://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("http://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})}); } })(); </script>
+<div class="fb-comments" data-href="https://seancherngtw.github.io/SeanCherngTW.github.io/2020/01/30/三種RNN-Cell之output和state差異/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+      
+  
+</section>
 
-        
-<!-- Disqus Comments -->
-<div id="disqus_thread">
-    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Suche">
+    <input type="hidden" name="as_sitesearch" value="seancherngtw.github.io/SeanCherngTW.github.io">
+  </form>
 </div>
+
+
+  
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+    <li><a href="/SeanCherngTW.github.io/tags/Jupyter-Notebook/">Jupyter Notebook</a><small>1</small></li>
+  
+    <li><a href="/SeanCherngTW.github.io/tags/NLP/">NLP</a><small>2</small></li>
+  
+    <li><a href="/SeanCherngTW.github.io/tags/Python/">Python</a><small>1</small></li>
+  
+    <li><a href="/SeanCherngTW.github.io/tags/TensorFlow/">TensorFlow</a><small>1</small></li>
+  
+    <li><a href="/SeanCherngTW.github.io/tags/李宏毅機器學習筆記/">李宏毅機器學習筆記</a><small>5</small></li>
+  
+    <li><a href="/SeanCherngTW.github.io/tags/深度學習/">深度學習</a><small>3</small></li>
+  
+    <li><a href="/SeanCherngTW.github.io/tags/網頁爬蟲/">網頁爬蟲</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2020 Sean Cherng
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="/SeanCherngTW.github.io/js/jquery-3.4.1.min.js"></script>
+<script src="/SeanCherngTW.github.io/js/jquery.imagesloaded.min.js"></script>
+<script src="/SeanCherngTW.github.io/js/gallery.js"></script>
+
+
 <script type="text/javascript">
-    var disqus_shortname = 'SeanCherngTW';
+var disqus_shortname = 'SeanCherngTW';
 
-    (function(){
-        var dsq = document.createElement('script');
-        dsq.type = 'text/javascript';
-        dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    }());
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
 </script>
 
 
-    </div>
 
-    
-
-
-        </main>
-        <footer class="footer syuanpi fadeIn" id="footer">
-    <hr>
-    <div class="footer-wrapper">
-        <div class="left">
-            <div class="contact-icon">
-    
-    
-    
-    
-    
-    
-    
-    
-</div>
-        </div>
-        <div class="right">
-            <div class="copyright">
-    <div class="info">
-        <span>&copy;</span>
-        <span>2017 ~ 2020</span>
-        <span>❤</span>
-        <span>Sean Cherng</span>
-    </div>
-    <div class="theme">
-        <span>
-            Powered by
-            <a href="http://hexo.io/" target="_blank">Hexo </a>
-        </span>
-        <span>
-            Theme
-            <a href="https://github.com/ColMugX/hexo-theme-Nlvi"> Nlvi </a>
-        </span>
-    </div>
-    
-</div>
-        </div>
-    </div>
-</footer>
-    </div>
-    <script src="/SeanCherngTW.github.io/script/nlvi.js"></script>
-<script src="/SeanCherngTW.github.io/script/search.js"></script>
-
-    <script src="/SeanCherngTW.github.io/lightbox/js/lightbox.min.js"></script>
-
-<script>
-$(document).ready(function(){
-    document.body.addEventListener('touchstart', function () {});
-    $('.progress').hide();
-    $('.body').show();
-    Nlvi.tagcloud();
-    Nlvi.mobileHeader();
-    Nlvi.back2top();
-    Nlvi.smoothScroll();
-    Nlvi.onView();
-    Nlvi.showToc();
-    Nlvi.showComments();
-    Nlvi.showReward();
-    Nlvi.picPos();
-
-    !CONFIG.animate && Nlvi.offAnimate();
-    CONFIG.lightbox && Nlvi.onPicBox();
-})
-</script>
-    </div>
-    
-        
-    
-    <div class="backtop syuanpi dead toTop" id="backtop">
-    <i class="iconfont icon-up"></i>
-    <span style="text-align:center;font-family:Georgia;"><span style="font-family:Georgia;" id="scrollpercent">1</span>%</span>
-</div>
-    
-    <div class="search" id="search">
-        <div class="mask" id="mask"></div>
-        <div class="search-wrapper syuanpi">
-            <h1 id="search-header" class="syuanpi">搜索一下？</h1>
-            <div class="input">
-                <input type="text" id="local-search-input" results="0" name="">
-            </div>
-            <div id="local-search-result"></div>
-        </div>
-    </div>
-    <script>
-    var GREETING = {
-        morning: "想找什麼呢？",
-        noon: "想找什麼呢？",
-        after: "想找什麼呢？",
-        night: "想找什麼呢？",
-        midnight: "想找什麼呢？"
-    }
-    $(document).ready(function(){
-        Nlvi.search();
-    });
-    </script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<link rel="stylesheet" href="/SeanCherngTW.github.io/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/SeanCherngTW.github.io/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
 <script type="text/x-mathjax-config">
   MathJax.Hub.Config("");
 </script>

@@ -1,0 +1,259 @@
+<!DOCTYPE HTML>
+<html lang="">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+  
+  <title>TinyBERT簡短重點整理 | Sean Chenrg&#39;s Blog</title>
+  <meta name="author" content="Sean Cherng">
+  
+  <meta name="description" content="Tiny BERTTinyBERT 是華為、華科聯合提出的一種為基於transformer 的模型專門設計的知識蒸餾方法，模型大小不到BERT 的1/7，但速度提高了9 倍，而且性能沒有出現明顯下降主要目標：減少transformer encoding 的層數和hidden size 大小">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="TinyBERT簡短重點整理"/>
+  <meta property="og:site_name" content="Sean Chenrg&#39;s Blog"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  <link href="/SeanCherngTW.github.io/favicon.png" rel="icon">
+  <link rel="alternate" href="/SeanCherngTW.github.io/atom.xml" title="Sean Chenrg&#39;s Blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/SeanCherngTW.github.io/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+</head>
+
+
+<body>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/SeanCherngTW.github.io/">Sean Chenrg&#39;s Blog</a></h1>
+  <h2><a href="/SeanCherngTW.github.io/"></a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/SeanCherngTW.github.io/">Home</a></li>
+    
+      <li><a href="/SeanCherngTW.github.io/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article id="post-TinyBERT簡短重點整理" class="h-entry post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time class="dt-published" datetime="2020-01-20T06:02:12.000Z"><a href="/SeanCherngTW.github.io/2020/01/20/TinyBERT簡短重點整理/">2020-01-20</a></time>
+      
+      
+  
+    <h1 class="p-name title" itemprop="headline name">TinyBERT簡短重點整理</h1>
+  
+
+    </header>
+    <div class="e-content entry" itemprop="articleBody">
+      
+        <h2 id="Tiny-BERT"><a href="#Tiny-BERT" class="headerlink" title="Tiny BERT"></a>Tiny BERT</h2><p>TinyBERT 是華為、華科聯合提出的一種為基於transformer 的模型專門設計的知識蒸餾方法，模型大小不到BERT 的1/7，但速度提高了9 倍，而且性能沒有出現明顯下降<br>主要目標：減少transformer encoding 的層數和hidden size 大小</p>
+<a id="more"></a>
+<p><img src="https://i.imgur.com/AhGMRtA.png" alt=""></p>
+<h3 id="Distillion"><a href="#Distillion" class="headerlink" title="Distillion"></a>Distillion</h3><ol>
+<li><p>Embedding Layer Distillion (Embedding蒸餾)<br>分別代表student 網絡的embedding 和teacher 網絡的embedding. 其中l 代表sequence length, d0 代表student embedding 維度， d 代表teacher embedding 維度。由於student 網絡的embedding 層通常較teacher 會變小以獲得更小的模型和加速，所以We 是一個d 0×d 維的可訓練的線性變換矩陣，把student 的embedding 投影到teacher embedding 所在的空間。最後再算MSE，得到embedding loss.<br><img src="https://i.imgur.com/EXddD0F.png" alt=""><br><img src="https://i.imgur.com/K5MdoKe.png" alt=""></p>
+</li>
+<li><p>Transformer-layer Distillation<br>TinyBERT 的transformer 蒸餾採用隔k 層蒸餾的方式。舉個例子，teacher BERT 一共有12 層，若是設置student BERT 為4 層，就是每隔3 層計算一個transformer loss. 映射函數為g(m) = 3 * m, m 為student encoder 層數<br><img src="https://i.imgur.com/bYVZzsD.png" alt=""></p>
+</li>
+</ol>
+<h3 id="Loss"><a href="#Loss" class="headerlink" title="Loss"></a>Loss</h3><ol>
+<li><p>Attention based loss</p>
+<ul>
+<li>A=Attention</li>
+<li>S=Student</li>
+<li>T=Teacher</li>
+<li>i=# head of multi-head attention<br><img src="https://i.imgur.com/R0gElzU.png?40" alt=""></li>
+</ul>
+</li>
+<li><p>hidden states based Distillation</p>
+<ul>
+<li>H=Transformer hidden layer output</li>
+<li>S=Student</li>
+<li>T=Teacher</li>
+<li>i=# head of multi-head attention<br><img src="https://i.imgur.com/z3PxS7L.png?40" alt=""></li>
+</ul>
+</li>
+<li><p>Prediction-Layer Distillation<br>具體來說，這一層計算了teacher 輸出的概率分佈和student 輸出的概率分佈的softmax 交叉熵。這一層的實現和具體任務相關，我們的兩個實驗分別採取了BERT 原生的masked language model loss + next sentence loss 和單任務的classification softmax cross-entropy.<br><img src="https://i.imgur.com/myjHMEu.png" alt=""></p>
+</li>
+<li><p>Summary<br>Loss Function<br><img src="https://i.imgur.com/9oeAHkI.png?40" alt=""><br><img src="https://i.imgur.com/1Lv70DO.png?40" alt=""></p>
+</li>
+</ol>
+<h3 id="Experiments"><a href="#Experiments" class="headerlink" title="Experiments"></a>Experiments</h3><ol>
+<li><p>系統架構<br><img src="https://i.imgur.com/wo01o7X.png?40" alt=""></p>
+</li>
+<li><p>步驟</p>
+<ul>
+<li>製作任務相關數據集</li>
+<li>fine-tune teacher BERT</li>
+<li>固定teacher BERT 參數，蒸餾得到TinyBERT</li>
+</ul>
+</li>
+<li><p>結果</p>
+</li>
+</ol>
+<ul>
+<li>GLUE<br><img src="https://i.imgur.com/LxXKN7k.jpg" alt=""></li>
+<li>文章連貫性特徵任務<br>做這個特徵的目的是為了過濾東拼西湊或者機器生成前後沒有邏輯的文章。由於語義的複雜性還有語義的轉移，這個任務和語義相似度任務略有不同，文章的上下句之間語義會有不同。在這個背景下，實驗過DSSM, Match-Pyramid 等模型，表現效果較差。<br>由於BERT 能學到豐富的語義，這個任務目前採用BERT 的next sentence 任務較為合適。但是一旦文章很長，原生BERT 需要算1 秒甚至更久，這樣的速度是不能接受的。<br><img src="https://i.imgur.com/NFyc1SE.png" alt=""></li>
+<li>問答FAQ<br>為用戶的query 匹配最接近的question，將其answer 返回，是一個Query-question 語義匹配任務<br><img src="https://i.imgur.com/nrYaJYf.png" alt=""></li>
+</ul>
+<h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><p><a href="https://zhuanlan.zhihu.com/p/94359189" target="_blank" rel="external">比 Bert 体积更小速度更快的 TinyBERT</a></p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+  
+  <div class="tags">
+    <a href="/SeanCherngTW.github.io/tags/NLP/">NLP</a>, <a href="/SeanCherngTW.github.io/tags/深度學習/">深度學習</a>
+  </div>
+
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">Kommentare</h1>
+
+  
+      <div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div class="fb-comments" data-href="https://seancherngtw.github.io/SeanCherngTW.github.io/2020/01/20/TinyBERT簡短重點整理/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+      
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Suche">
+    <input type="hidden" name="as_sitesearch" value="seancherngtw.github.io/SeanCherngTW.github.io">
+  </form>
+</div>
+
+
+  
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+    <li><a href="/SeanCherngTW.github.io/tags/Jupyter-Notebook/">Jupyter Notebook</a><small>1</small></li>
+  
+    <li><a href="/SeanCherngTW.github.io/tags/NLP/">NLP</a><small>2</small></li>
+  
+    <li><a href="/SeanCherngTW.github.io/tags/Python/">Python</a><small>1</small></li>
+  
+    <li><a href="/SeanCherngTW.github.io/tags/TensorFlow/">TensorFlow</a><small>1</small></li>
+  
+    <li><a href="/SeanCherngTW.github.io/tags/李宏毅機器學習筆記/">李宏毅機器學習筆記</a><small>5</small></li>
+  
+    <li><a href="/SeanCherngTW.github.io/tags/深度學習/">深度學習</a><small>3</small></li>
+  
+    <li><a href="/SeanCherngTW.github.io/tags/網頁爬蟲/">網頁爬蟲</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2020 Sean Cherng
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="/SeanCherngTW.github.io/js/jquery-3.4.1.min.js"></script>
+<script src="/SeanCherngTW.github.io/js/jquery.imagesloaded.min.js"></script>
+<script src="/SeanCherngTW.github.io/js/gallery.js"></script>
+
+
+<script type="text/javascript">
+var disqus_shortname = 'SeanCherngTW';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+<link rel="stylesheet" href="/SeanCherngTW.github.io/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/SeanCherngTW.github.io/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+</body>
+</html>
