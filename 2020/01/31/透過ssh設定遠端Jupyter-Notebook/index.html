@@ -1,11 +1,7 @@
 <!DOCTYPE html>
 <html lang="">
 <head>
-    <!-- hexo-inject:begin --><!-- hexo-inject:end --><title>
-  
-    TensorFlow · Sean Chenrg's Blog
-  
-</title>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><title> 透過ssh設定遠端Jupyter Notebook · Sean Chenrg's Blog </title>
     <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
@@ -20,6 +16,8 @@
 
 
 
+
+    <meta name="keywords" content="Jupyter Notebook, Nlvi" />
 
 <link rel="stylesheet" href="/SeanCherngTW.github.io/style/style.css">
 <script src="/SeanCherngTW.github.io/script/jquery.min.js"></script>
@@ -202,36 +200,110 @@
         <main class="main" id="main">
             
     
-    <div class="archive syuanpi riseIn-light" id="archive">
-        
-            <h2 class="archive-title"> now in </h2>
-            <span class="archive-name"> — TensorFlow</span>
-        
-        <div class="archive-list">
-            <ul>
-        
-            
-            
-            <li class="archive-post">
-                <span class="archive-post-time">
+    <article class="post">
+        <header class="post-header">
+            <div class="post-time syuanpi riseIn-light back-1">
+                <span>January 31, 2020</span>
                 
-                    2020-01-30
+            </div>
+            <h1 class="post-title syuanpi riseIn-light back-2">
+            
+                透過ssh設定遠端Jupyter Notebook
+            
+            </h1>
+            
                 
-                </span>
-                <span class="archive-post-link">
-                    <a href="/SeanCherngTW.github.io/2020/01/30/三種RNN-Cell之output和state差異/">三種RNN Cell之output和state的差異</a>
-                </span>
-            </li>
+                    <div class="post-tags syuanpi riseIn-light back-3">
+                    
+                        <a href="/SeanCherngTW.github.io/tags/Jupyter-Notebook/">Jupyter Notebook</a>
+                    
+                    </div>
+                
+            
+        </header>
+        <div class="post-content syuanpi riseIn-light back-3">
+            
+                <ol>
+<li>安裝jupyter notebook</li>
+<li>移動到母目錄 cd ~</li>
+<li>執行指令<figure class="highlight plain"><figcaption><span>jupyter notebook --generate-config```</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">4. 執行指令```$ jupyter notebook password```設定密碼</div><div class="line">5. 去~/.jupyter/jupyter_notebook_config.json找到你密碼的SHA1</div><div class="line">6. 編輯 ~/.jupyter/jupyter_notebook_config.py如下：</div></pre></td></tr></table></figure></li>
+</ol>
+<p>c.NotebookApp.open_browser = False<br>c.NotebookApp.password = u’sha1:[YOUR SHA1]’<br>c.NotebookApp.password_required = True<br>c.NotebookApp.port = [YOUR PORT] # 要確定這個PORT沒有人在用<br>c.NotebookApp.ip = ‘*’<br>```</p>
 
+            
         
-            </ul>
         </div>
-    </div>
+        
+            
+            
+        
+    </article>
     
-    <nav class="pagination">
-        <span class="page-number current">1</span>
+        
+    <nav class="article-page">
+        
+        
+            <a href="/SeanCherngTW.github.io/2020/01/30/三種RNN-Cell之output和state差異/" id="art-right" class="art-left">
+                <span class="prev-title"> 
+                    <i class="iconfont icon-left"></i>三種RNN Cell之output和state的差異
+                </span>
+            </a>
+        
     </nav>
 
+        
+    <i id="com-switch" class="iconfont icon-more jumping-in long infinite" style="font-size:24px;display:block;text-align:center;transform:rotate(180deg);"></i>
+    <div class="post-comments" id="post-comments" style="display: block;margin: auto 16px;">
+        
+        
+<!-- Gitment Comments -->
+<div id="gitment"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+var gitment = new Gitment({
+  owner: "",
+  repo: '',
+  oauth: {
+    client_id: '',
+    client_secret: '',
+  },
+})
+gitment.render('gitment')
+</script>
+
+        
+<!-- SOHUCS Comments -->
+<div id="SOHUCS"></div> 
+<script type="text/javascript"> 
+(function(){ 
+var appid = '';
+var conf = '';
+var width = window.innerWidth || document.documentElement.clientWidth; 
+if (width < 960) { 
+window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="http://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("http://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})}); } })(); </script>
+
+        
+<!-- Disqus Comments -->
+<div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+<script type="text/javascript">
+    var disqus_shortname = 'SeanCherngTW';
+
+    (function(){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+    </div>
+
+    
 
 
         </main>
@@ -299,6 +371,8 @@ $(document).ready(function(){
 })
 </script>
     </div>
+    
+        
     
     <div class="backtop syuanpi dead toTop" id="backtop">
     <i class="iconfont icon-up"></i>

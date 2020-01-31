@@ -58,7 +58,7 @@
     <div class="tagcloud-mask"></div>  
 <div class="tagcloud" id="tagcloud">
     <div class="tagcloud-inner">
-        <a href="/SeanCherngTW.github.io/tags/Python/" style="font-size: 14px;">Python</a> <a href="/SeanCherngTW.github.io/tags/TensorFlow/" style="font-size: 14px;">TensorFlow</a> <a href="/SeanCherngTW.github.io/tags/李宏毅機器學習筆記/" style="font-size: 14px;">李宏毅機器學習筆記</a> <a href="/SeanCherngTW.github.io/tags/深度學習/" style="font-size: 14px;">深度學習</a> <a href="/SeanCherngTW.github.io/tags/網頁爬蟲/" style="font-size: 14px;">網頁爬蟲</a>
+        <a href="/SeanCherngTW.github.io/tags/Jupyter-Notebook/" style="font-size: 14px;">Jupyter Notebook</a> <a href="/SeanCherngTW.github.io/tags/Python/" style="font-size: 14px;">Python</a> <a href="/SeanCherngTW.github.io/tags/TensorFlow/" style="font-size: 14px;">TensorFlow</a> <a href="/SeanCherngTW.github.io/tags/李宏毅機器學習筆記/" style="font-size: 14px;">李宏毅機器學習筆記</a> <a href="/SeanCherngTW.github.io/tags/深度學習/" style="font-size: 14px;">深度學習</a> <a href="/SeanCherngTW.github.io/tags/網頁爬蟲/" style="font-size: 14px;">網頁爬蟲</a>
     </div>
 </div>
     <header class="header" id="header">
@@ -166,7 +166,7 @@
                     </div>
                     <div class="mobile-nav-tagcloud">
                         <div class="mobile-tagcloud-inner">
-                            <a href="/SeanCherngTW.github.io/tags/Python/" style="font-size: 14px;">Python</a> <a href="/SeanCherngTW.github.io/tags/TensorFlow/" style="font-size: 14px;">TensorFlow</a> <a href="/SeanCherngTW.github.io/tags/李宏毅機器學習筆記/" style="font-size: 14px;">李宏毅機器學習筆記</a> <a href="/SeanCherngTW.github.io/tags/深度學習/" style="font-size: 14px;">深度學習</a> <a href="/SeanCherngTW.github.io/tags/網頁爬蟲/" style="font-size: 14px;">網頁爬蟲</a>
+                            <a href="/SeanCherngTW.github.io/tags/Jupyter-Notebook/" style="font-size: 14px;">Jupyter Notebook</a> <a href="/SeanCherngTW.github.io/tags/Python/" style="font-size: 14px;">Python</a> <a href="/SeanCherngTW.github.io/tags/TensorFlow/" style="font-size: 14px;">TensorFlow</a> <a href="/SeanCherngTW.github.io/tags/李宏毅機器學習筆記/" style="font-size: 14px;">李宏毅機器學習筆記</a> <a href="/SeanCherngTW.github.io/tags/深度學習/" style="font-size: 14px;">深度學習</a> <a href="/SeanCherngTW.github.io/tags/網頁爬蟲/" style="font-size: 14px;">網頁爬蟲</a>
                         </div>
                     </div>
                 </div>
@@ -203,6 +203,39 @@
     
 
 <section class="posts">
+    
+        
+    <article class="post">
+        <header class="post-header">
+            <div class="post-time syuanpi riseIn-light back-1">
+                <span>January 31, 2020</span>
+                
+            </div>
+            <h1 class="post-title syuanpi riseIn-light back-2">
+            
+                <a href="/SeanCherngTW.github.io/2020/01/31/透過ssh設定遠端Jupyter-Notebook/">透過ssh設定遠端Jupyter Notebook</a>
+            
+            </h1>
+            
+        </header>
+        <div class="post-content syuanpi riseIn-light back-3">
+            
+                
+                    <ol>
+<li>安裝jupyter notebook</li>
+<li>移動到母目錄 cd ~</li>
+<li>執行指令<figure class="highlight plain"><figcaption><span>jupyter notebook --generate-config```</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">4. 執行指令```$ jupyter notebook password```設定密碼</div><div class="line">5. 去~/.jupyter/jupyter_notebook_config.json找到你密碼的SHA1</div><div class="line">6. 編輯 ~/.jupyter/jupyter_notebook_config.py如下：</div></pre></td></tr></table></figure></li>
+</ol>
+<p>c.NotebookApp.open_browser = False<br>c.NotebookApp.password = u’sha1:[YOUR SHA1]’<br>c.NotebookApp.password_required = True<br>c.NotebookApp.port = [YOUR PORT] # 要確定這個PORT沒有人在用<br>c.NotebookApp.ip = ‘*’<br>```</p>
+
+                
+            
+        
+        </div>
+        
+    </article>
+    
+
     
         
     <article class="post">
