@@ -214,32 +214,15 @@
     </header>
     <div class="e-content entry" itemprop="articleBody">
       
-        <h2 id="XLnet"><a href="#XLnet" class="headerlink" title="XLnet"></a>XLnet</h2><h3 id="Auto-Regressive-AR"><a href="#Auto-Regressive-AR" class="headerlink" title="Auto Regressive (AR)"></a>Auto Regressive (AR)</h3><p><img src="https://i.imgur.com/zVnWFSs.png" alt=""><br>用前文預測後文，比如說用{x1, x2,…, xt-1}預測xt，主要應用在GPT和ELMO上，只能以單向的資訊去預測。ELMo雖然看似雙向架構，但其實他是訓練兩個單向LSTM後再concat起來，效果並不如真正的雙向架構<br><img src="https://i.imgur.com/l9zgF7d.png" alt=""></p>
-<h3 id="Auto-Encoding-AE"><a href="#Auto-Encoding-AE" class="headerlink" title="Auto Encoding (AE)"></a>Auto Encoding (AE)</h3><p><img src="https://i.imgur.com/gT6yuPw.png" alt=""><br>把句子中其中一個字mask掉，去預測那個被mask的字。在Pre-train模型中首次有使用到DAE的模型就是BERT的MLM(Masked Language Model)。隨機把所有句子中15%的token使用Mask來替代，然後在預測時將Mask的位置預測成原來的字，把替換成Mask然後再還原的作法可以視為一種DAE，這種作法可以幫助預測Mask時充分運用到上下文的資訊。但這只有在Pre-train階段會用到，fine-tune階段時不會用到Mask，資料格式不相同的情況下作者認為這會影響到效能。</p>
-<p><img src="https://i.imgur.com/7N8hOC9.png" alt=""></p>
-<p>另外若同一個句子有兩個Mask，BERT的訓練方法是會將這兩個位置同時產生輸出，這代表了這兩個字會是獨立的，但如圖的x3, x4他們是有依賴關係的，所以必須使用AR方法改進，讓model先先預測x3再預測x4<br><img src="https://i.imgur.com/nOaWwS7.png" alt=""></p>
-<h3 id="Permutation-Language-Modeling"><a href="#Permutation-Language-Modeling" class="headerlink" title="Permutation Language Modeling"></a>Permutation Language Modeling</h3><p>XLNet的想法就是要使用AR的方式來預測單詞，又要能在不使用Mask的前提下學習到上下文的資訊，所以XLNet提出的Permutation Language Modeling(PLM)，即使用permutation實現上下文對於單詞的預測，其實訓練方式還是transfomer的self-attention，只是對輸入與attention matrix進行一點修飾。<br><img src="https://i.imgur.com/Tp74VJw.png" alt=""></p>
-<p>在訓練階段時，隨機對輸入句子的排序做排列組合，例如{x2, x4, x3, x1}，就能夠在預測x3時輸入x2和x4作為前後文資訊，雖然架構上還是單向的Attention，但如此一來不但包含了前文也包含了後文，也不需用到Mask。<br><img src="https://i.imgur.com/BnaxWEw.png" alt=""><br>由於架構是Transformer的Attention，在word embedding中有包含position embedding，所以用排列組合打亂句子順序其實不會對效能有太大的影響。</p>
-<h3 id="Two-Stream-Self-Attention"><a href="#Two-Stream-Self-Attention" class="headerlink" title="Two-Stream Self-Attention"></a>Two-Stream Self-Attention</h3><p>在BERT中，使用Mask來告訴模型應該要預測哪一個字和前後文關係，而在XLNet中，則是使用Two-Stream Self-Attention來實現這兩種目的</p>
-<h4 id="Content-Stream"><a href="#Content-Stream" class="headerlink" title="Content Stream"></a>Content Stream</h4><ul>
-<li>Pre-train和Fine-tune時都會用到</li>
-<li>產生Representation拿來做預測</li>
-</ul>
-<p><img src="https://i.imgur.com/SKiOoT3.png" alt=""></p>
-<p>例如輸入序列為：{x3,x2,x4,x1}，每一個位置包含的Attention為：<br><img src="https://i.imgur.com/dUMDeB8.png" alt=""></p>
-<h4 id="Query-Stream"><a href="#Query-Stream" class="headerlink" title="Query Stream"></a>Query Stream</h4><ul>
-<li>只有Pre-train時用到</li>
-<li>如同BERT的Mask</li>
-</ul>
-<p><img src="https://i.imgur.com/ZecQRMV.png" alt=""><br>Query Stream負責在Pre-train擔任預測單詞的作用，因為在預測單詞時不允許模型看到當前的token是什麼，所以作者在這邊另外設置一個representation g來去attend其他位置。下圖中發現Query Stream把當前位置的資訊Mask掉，這是為了不讓模型知道目前要預測的位置資訊，同時也有BERT的Mask效果。<br><img src="https://i.imgur.com/srUsXmE.png" alt=""></p>
-<h3 id="Long-Text-Understanding"><a href="#Long-Text-Understanding" class="headerlink" title="Long Text Understanding"></a>Long Text Understanding</h3><p>在XLNet中，作者為了讓模型有大型文本的學習能力，借鑑Transformer-XL的Segment recurrence mechanism和Relative positional encoding的方法，簡單來說就是讓不同Segment之間互相Attention，公式如Eq.8，h上方波浪符表示上一個Segment所有的hidden representation。<br><img src="https://i.imgur.com/60FdzyE.png" alt=""></p>
-<p>從公式就知道是用當前Segment與兩者Segment concatenate的結果進行Attention，詳細的運作方式如Fig.15，Q是當前Segment，K是上一個Segment與當前Segment的concatenation，兩個矩陣相乘後就得到右邊的長方形Attetnion matrix，因為沒有舉例要Permutation的位置，筆者這裡隨便舉一個Sequence出來，重點是排列後Sequence{z5,z7,z6,z8}，並把z6當成Target去把Attention matrix沒有attend的位置mask掉。<br><img src="https://i.imgur.com/OmHeFWq.png" alt=""></p>
-<p><a href="https://medium.com/ai-academy-taiwan/2019-nlp%E6%9C%80%E5%BC%B7%E6%A8%A1%E5%9E%8B-xlnet-ac728b400de3" target="_blank" rel="external">2019-NLP最強模型: XLNet</a></p>
-
+        <p>XLNet的想法就是要使用Auto Regressive的方式來預測單詞（用{x1, x2,…, xt-1}預測xt），但是這種作法在預測xt的時候只能得到x1~xt-1的forward資訊，得不到backward資訊。XLNet又要能在不使用Mask的前提下學習到上下文的資訊進行訓練，結合GPT和BERT的優點進行改良</p>
       
     </div>
     <footer>
       
+        
+          <div class="alignleft">
+            <a href="/SeanCherngTW.github.io/2020/01/17/XLNet簡短重點整理/#more" class="more-link">Read More</a>
+          </div>
         
         
       
@@ -467,15 +450,15 @@
 <nav id="pagination">
   
   
-    <a href="/SeanCherngTW.github.io/page/2/" class="alignright next">Siguiente</a>
+    <a href="/SeanCherngTW.github.io/page/2/" class="alignright next">Nächste Seite</a>
   
   <div class="clearfix"></div>
 </nav></div></div>
     <aside id="sidebar" class="alignright">
   <div class="search">
   <form action="//google.com/search" method="get" accept-charset="utf-8">
-    <input type="search" name="q" results="0" placeholder="Buscar">
-    <input type="hidden" name="as_sitesearch" value="seancherngtw.github.io/SeanCherngTW.github.io">
+    <input type="search" name="q" results="0" placeholder="Suche">
+    <input type="hidden" name="as_sitesearch" value="seancherngtw.github.io/blog">
   </form>
 </div>
 
@@ -484,7 +467,7 @@
 
   
 <div class="widget tag">
-  <h3 class="title">Etiquetas</h3>
+  <h3 class="title">Tags</h3>
   <ul class="entry">
   
     <li><a href="/SeanCherngTW.github.io/tags/Jupyter-Notebook/">Jupyter Notebook</a><small>1</small></li>
