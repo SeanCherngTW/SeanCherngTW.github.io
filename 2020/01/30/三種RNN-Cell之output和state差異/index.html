@@ -229,17 +229,16 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># create a BasicRNNCell</span></div><div class="line">rnn_cell = tf.compat.v1.nn.rnn_cell.BasicRNNCell(hidden_size)</div><div class="line"></div><div class="line"><span class="comment"># 'outputs' is a tensor of shape [batch_size, max_time, cell_state_size]</span></div><div class="line"></div><div class="line"><span class="comment"># defining initial state</span></div><div class="line">initial_state = rnn_cell.zero_state(batch_size, dtype=tf.float32)</div><div class="line"></div><div class="line"><span class="comment"># 'state' is a tensor of shape [batch_size, cell_state_size]</span></div><div class="line">outputs, state = tf.compat.v1.nn.dynamic_rnn(rnn_cell, input_data,</div><div class="line">                                   initial_state=initial_state,</div><div class="line">                                   dtype=tf.float32)</div></pre></td></tr></table></figure></p>
 <p>有些網路上的教學會說output和state是相同的，但實際用起來好像有時候也不相同，所以就讓我們來從三種RNN Cell的角度來分析一下。</p>
 <a id="more"></a>
-<h3 id="Basic-RNN-Cell"><a href="#Basic-RNN-Cell" class="headerlink" title="Basic RNN Cell"></a>Basic RNN Cell</h3><p>最簡單的RNN Cell如圖：
-<img src="https://i.imgur.com/683CSh5.png" alt="">
-其中 </p>
+<h3 id="Basic-RNN-Cell"><a href="#Basic-RNN-Cell" class="headerlink" title="Basic RNN Cell"></a>Basic RNN Cell</h3><p>最簡單的RNN Cell如圖：<br><br></p>
+<p><img src="https://i.imgur.com/683CSh5.png" alt=""><br><br></p>
 <ul>
 <li>$x^t$ 為在時間點 $t$ 的輸入</li>
 <li>$h^{t-1}$ 為時間點 $t-1$ 的輸出</li>
 <li>$h^{t}$ 為時間點 $t$ 的輸出。</li>
 </ul>
 <p>在基本單層RNN Cell中，以時間點$t$來看，output和state的值都是$h^{t}$。但是如果有使用深層架構，那兩者就會不相同，我會在下面解釋這兩者之間的差異。</p>
-<h3 id="LSTM-Cell"><a href="#LSTM-Cell" class="headerlink" title="LSTM Cell"></a>LSTM Cell</h3><p>相較於Basic RNN Cell，LSTM Cell新增了三個用於控制資訊流量的閘門，分別為Forget gate, Input gate和Output gate，如下圖所示：<br></p>
-<p><img src="https://i.imgur.com/9mTC4iS.png" alt=""><br></p>
+<h3 id="LSTM-Cell"><a href="#LSTM-Cell" class="headerlink" title="LSTM Cell"></a>LSTM Cell</h3><p>相較於Basic RNN Cell，LSTM Cell新增了三個用於控制資訊流量的閘門，分別為Forget gate, Input gate和Output gate，如下圖所示：<br><br></p>
+<p><img src="https://i.imgur.com/9mTC4iS.png" alt=""><br><br></p>
 <ul>
 <li>$x^t$ 為在時間點 $t$ 的輸入</li>
 <li>$f^t$ 為Forget gate，用來控制要保留或捨去多少比例的$C^{t-1}$</li>
@@ -250,19 +249,19 @@
 <li>$c^{t-1}$ 為時間點 $c-1$ 時的記憶</li>
 <li>$c^{t}$ 則為時間點 $c$ 時的記憶</li>
 </ul>
-<p>我們使用單層LSTM時，呼叫<code>outputs, state = tf.compat.v1.nn.dynamic_rnn()</code>所得到的<code>output</code>在 $t$ 時間是 ${h^{t}}$ ，但state會是 $[{c^t},{h^{t}}]$，因此兩者不同。若使用深層LSTM架構時，如下圖：<br></p>
-<p><img src="https://i.imgur.com/Fti66rk.png" alt=""><br></p>
+<p>我們使用單層LSTM時，呼叫<code>outputs, state = tf.compat.v1.nn.dynamic_rnn()</code>所得到的<code>output</code>在 $t$ 時間是 ${h^{t}}$ ，但state會是 $[{c^t},{h^{t}}]$，因此兩者不同。若使用深層LSTM架構時，如下圖：<br><br></p>
+<p><img src="https://i.imgur.com/Fti66rk.png" alt=""><br><br></p>
 <p>以 $t+1$ 時間點為例，output為最後一層的 $t+1$ 時間點輸出，是 ${h^{t+1}_{l+2}}$，而state則是每一層的 $t+1$ 時間點的 $c^{t+1}$ $h^{t+1}$ 結合成的list，也就是$[[c^{t-1},h^{t-1}], [c^{t}, h^{t}], [c^{t+1}, h^{t+1}]]$。因此在LSTM Cell的狀況下，不管單層或多層，output和state都不會相等。</p>
-<h3 id="GRU-Cell"><a href="#GRU-Cell" class="headerlink" title="GRU Cell"></a>GRU Cell</h3><p>相較於LSTM Cell，GRU Cell使用了Memory gate取代Input gate和Forget gate，讓參數可以有效減少，同時GRU也不像LSTM有 $c^t$ 來儲存記憶狀態，如下圖所示：<br></p>
-<p><img src="https://i.imgur.com/nNWbaPo.png" alt=""><br></p>
+<h3 id="GRU-Cell"><a href="#GRU-Cell" class="headerlink" title="GRU Cell"></a>GRU Cell</h3><p>相較於LSTM Cell，GRU Cell使用了Memory gate取代Input gate和Forget gate，讓參數可以有效減少，同時GRU也不像LSTM有 $c^t$ 來儲存記憶狀態，如下圖所示：<br><br></p>
+<p><img src="https://i.imgur.com/nNWbaPo.png" alt=""><br><br></p>
 <ul>
 <li>$x^t$ 為在時間點 $t$ 的輸入</li>
 <li>$u^t$ Memory gate，用來控制要保留或捨去多少比例的$C^{t-1}$</li>
 <li>$h^{t-1}$ 為時間點 $t-1$ 的輸出</li>
 <li>${h^{t}}$ 為時間點 $t$ 的輸出</li>
 </ul>
-<p>我們使用單層LSTM時，呼叫<code>outputs, state = tf.compat.v1.nn.dynamic_rnn()</code>所得到的<code>output</code>在 $t$ 時間是 ${h^{t}}$ ，state也是 ${h^{t}}$，因此和Basic RNN Cell一樣，兩者相等。若使用深層LSTM架構時，如下圖：<br></p>
-<p><img src="https://i.imgur.com/iLatvSM.png" alt=""><br></p>
+<p>我們使用單層LSTM時，呼叫<code>outputs, state = tf.compat.v1.nn.dynamic_rnn()</code>所得到的<code>output</code>在 $t$ 時間是 ${h^{t}}$ ，state也是 ${h^{t}}$，因此和Basic RNN Cell一樣，兩者相等。若使用深層LSTM架構時，如下圖：<br><br></p>
+<p><img src="https://i.imgur.com/iLatvSM.png" alt=""><br><br></p>
 <p>以 $t+1$ 時間點為例，output為最後一層的 $t+1$ 時間點輸出，是 ${h^{t+1}_{l+2}}$，而state則是每一層的 $t+1$ 時間點的 $c^{t+1}$ $h^{t+1}$ 結合成的list，也就是$[h^{t-1}, h^{t}, h^{t+1}]$。GRU Cell的狀況下，只有單層架構時output和state會相等</p>
 <h3 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h3><p>單層架構時output和state相等，多層架構時不相等：</p>
 <ul>
