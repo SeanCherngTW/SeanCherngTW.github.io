@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><title>
+    Sean Chenrg's Blog
+    
+</title>
+    <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="browsermode" content="application">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Sean Chenrg's Blog">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="msapplication-navbutton-color" content="#666666">
+<meta name= "format-detection" content="telephone=no" />
+<meta name="keywords" content="nlvi, Nlvi" />
+
+
+
+
+
+<link rel="stylesheet" href="/SeanCherngTW.github.io/style/style.css">
+<script src="/SeanCherngTW.github.io/script/jquery.min.js"></script>
+<script>
+    var CONFIG = {
+        title: "Sean Chenrg's Blog",
+        author: "Sean Cherng",
+        lightbox: true,
+        animate: true
+    }
+</script>
+
+
+
+    <link rel="stylesheet" href="/SeanCherngTW.github.io/lightbox/css/lightbox.min.css">
+
+
+
+
+    <link rel="stylesheet" href="/SeanCherngTW.github.io/syuanpi/syuanpi.min.css"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+
+
+
+
+
+
+
+</head>
+<body>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="progress">
+    <div class="progress-inner"></div>
+</div>
+    <div class="body">
+    <div class="tagcloud-mask"></div>  
+<div class="tagcloud" id="tagcloud">
+    <div class="tagcloud-inner">
+        <a href="/SeanCherngTW.github.io/tags/Python/" style="font-size: 14px;">Python</a> <a href="/SeanCherngTW.github.io/tags/TensorFlow/" style="font-size: 14px;">TensorFlow</a> <a href="/SeanCherngTW.github.io/tags/李宏毅機器學習筆記/" style="font-size: 14px;">李宏毅機器學習筆記</a> <a href="/SeanCherngTW.github.io/tags/深度學習/" style="font-size: 14px;">深度學習</a> <a href="/SeanCherngTW.github.io/tags/網頁爬蟲/" style="font-size: 14px;">網頁爬蟲</a>
+    </div>
+</div>
+    <header class="header" id="header">
+    <div class="title syuanpi tvIn">
+    <div class="table">
+        <div class="connect">
+            <div class="connect-inner">
+                <span><a href="/">Sean Chenrg's Blog</a></span>
+                
+            </div>
+        </div>
+    </div>
+</div>
+    <nav class="main-nav syuanpi tvIn">
+<div class="table">
+
+    <ul class="menu">
+        
+        <li class="menu-item">
+            <a href="javascript:;" id="search">
+                <span>Search</span>
+                
+                
+            </a>
+        </li>
+        
+        
+        
+            <li class="menu-item">
+                <a href="/SeanCherngTW.github.io/">
+                    <span>Article</span>
+                    
+                    
+                </a>
+            </li>
+        
+        
+        
+            <li class="menu-item">
+                <a href="/SeanCherngTW.github.io/archives">
+                    <span>Archives</span>
+                    
+                    
+                </a>
+            </li>
+        
+        
+        
+            <li class="menu-item">
+                <a href="javascript:;" id="tags">
+                    <span>Tags</span>
+                    
+                    
+                </a>
+            </li>
+        
+        
+        
+            <li class="menu-item">
+                <a href="https://github.com/SeanCherngTW">
+                    <span>About</span>
+                    
+                    
+                </a>
+            </li>
+        
+        
+    </ul>
+
+</div>
+</nav>
+</header>
+<div class="mobile-header">
+    <div class="mobile-header-body">
+        <div class="mobile-header-list">
+            
+            
+                <div class="mobile-nav-item">
+                    <a href="/SeanCherngTW.github.io/">
+                        <span>Article</span>
+                        
+                        
+                    </a>
+                </div>
+            
+            
+            
+                <div class="mobile-nav-item">
+                    <a href="/SeanCherngTW.github.io/archives">
+                        <span>Archives</span>
+                        
+                        
+                    </a>
+                </div>
+            
+            
+            
+                <div class="mobile-nav-item inner-cloud">
+                    <div class="mobile-nav-tag">
+                        <a href="javascript:;" id="mobile-tags">
+                            <span>Tags</span>
+                            
+                            
+                        </a>
+                    </div>
+                    <div class="mobile-nav-tagcloud">
+                        <div class="mobile-tagcloud-inner">
+                            <a href="/SeanCherngTW.github.io/tags/Python/" style="font-size: 14px;">Python</a> <a href="/SeanCherngTW.github.io/tags/TensorFlow/" style="font-size: 14px;">TensorFlow</a> <a href="/SeanCherngTW.github.io/tags/李宏毅機器學習筆記/" style="font-size: 14px;">李宏毅機器學習筆記</a> <a href="/SeanCherngTW.github.io/tags/深度學習/" style="font-size: 14px;">深度學習</a> <a href="/SeanCherngTW.github.io/tags/網頁爬蟲/" style="font-size: 14px;">網頁爬蟲</a>
+                        </div>
+                    </div>
+                </div>
+            
+            
+            
+                <div class="mobile-nav-item">
+                    <a href="https://github.com/SeanCherngTW">
+                        <span>About</span>
+                        
+                        
+                    </a>
+                </div>
+            
+            
+        </div>
+    </div>
+    <div class="mobile-header-nav">
+        <div class="mobile-header-item" id="mobile-left">
+            <div class="header-menu-item">
+                <span class="header-menu-line"></span>
+            </div>
+        </div>
+        <h1 class="mobile-header-title">
+            <a href="/">Sean Chenrg's Blog</a>
+        </h1>
+        <div class="mobile-header-item"></div>
+    </div>
+</div>
+
+    <div class="container">
+        <main class="main" id="main">
+            
+    
+
+<section class="posts">
+    
+        
+    <article class="post">
+        <header class="post-header">
+            <div class="post-time syuanpi riseIn-light back-1">
+                <span>January 30, 2020</span>
+                
+            </div>
+            <h1 class="post-title syuanpi riseIn-light back-2">
+            
+                <a href="/SeanCherngTW.github.io/2020/01/30/三種RNN-Cell之output和state差異/">三種RNN Cell之output和state的差異</a>
+            
+            </h1>
+            
+        </header>
+        <div class="post-content syuanpi riseIn-light back-3">
+            
+                
+                    <h3 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h3><p>我們在使用TensorFlow建立RNN架構時，會看到dynamic_rnn()的輸出有兩個，一個是outputs，另一個是state：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># create a BasicRNNCell</span></div><div class="line">rnn_cell = tf.compat.v1.nn.rnn_cell.BasicRNNCell(hidden_size)</div><div class="line"></div><div class="line"><span class="comment"># 'outputs' is a tensor of shape [batch_size, max_time, cell_state_size]</span></div><div class="line"></div><div class="line"><span class="comment"># defining initial state</span></div><div class="line">initial_state = rnn_cell.zero_state(batch_size, dtype=tf.float32)</div><div class="line"></div><div class="line"><span class="comment"># 'state' is a tensor of shape [batch_size, cell_state_size]</span></div><div class="line">outputs, state = tf.compat.v1.nn.dynamic_rnn(rnn_cell, input_data,</div><div class="line">                                   initial_state=initial_state,</div><div class="line">                                   dtype=tf.float32)</div></pre></td></tr></table></figure></p>
+<p>有些網路上的教學會說output和state是相同的，但實際用起來好像有時候也不相同，所以就讓我們來從三種RNN Cell的角度來分析一下。</p>
+                    
+            
+        
+            <p class="content-link">
+                <a href="/SeanCherngTW.github.io/2020/01/30/三種RNN-Cell之output和state差異/#more">
+                    <span class="iconfont icon-right">Read More...</span>
+                </a>
+            </p>
+        
+        </div>
+        
+    </article>
+    
+
+    
+        
+    <article class="post">
+        <header class="post-header">
+            <div class="post-time syuanpi riseIn-light back-1">
+                <span>August 20, 2019</span>
+                
+            </div>
+            <h1 class="post-title syuanpi riseIn-light back-2">
+            
+                <a href="/SeanCherngTW.github.io/2019/08/20/ML-Lecture-10-Convolutional-Neural-Network/">ML Lecture 10: Convolutional Neural Network</a>
+            
+            </h1>
+            
+        </header>
+        <div class="post-content syuanpi riseIn-light back-3">
+            
+                
+                    <h4 id="圖像辨識使用CNN"><a href="#圖像辨識使用CNN" class="headerlink" title="圖像辨識使用CNN"></a>圖像辨識使用CNN</h4><ul>
+<li>需要辨識的物體可能只佔了圖片的某一小塊（Convolution）</li>
+<li>同樣的pattern在圖片中的不同地方仍然代表一樣的意思（Convolution）</li>
+<li>圖片縮小後，仍然可以輕易地分辨出圖片中的物體（pooling）</li>
+</ul>
+                    
+            
+        
+            <p class="content-link">
+                <a href="/SeanCherngTW.github.io/2019/08/20/ML-Lecture-10-Convolutional-Neural-Network/#more">
+                    <span class="iconfont icon-right">Read More...</span>
+                </a>
+            </p>
+        
+        </div>
+        
+    </article>
+    
+
+    
+        
+    <article class="post">
+        <header class="post-header">
+            <div class="post-time syuanpi riseIn-light back-1">
+                <span>August 19, 2019</span>
+                
+            </div>
+            <h1 class="post-title syuanpi riseIn-light back-2">
+            
+                <a href="/SeanCherngTW.github.io/2019/08/19/ML-Lecture-3-1-Gradient-Descent/">ML Lecture 3-1: Gradient Descent</a>
+            
+            </h1>
+            
+        </header>
+        <div class="post-content syuanpi riseIn-light back-3">
+            
+                
+                    <h4 id="Feature-Scaling"><a href="#Feature-Scaling" class="headerlink" title="Feature Scaling"></a>Feature Scaling</h4><ul>
+<li>把輸入的特徵的值範圍調整成一致</li>
+<li>可以想成標準化，平均=1、標準差=0</li>
+<li>如此一來在做Gradient Descent時，可以讓梯度以直線往最低點前進，讓各參數不需要客製化自己的Learning rate
+                    
+            
+        
+            <p class="content-link">
+                <a href="/SeanCherngTW.github.io/2019/08/19/ML-Lecture-3-1-Gradient-Descent/#more">
+                    <span class="iconfont icon-right">Read More...</span>
+                </a>
+            </p>
+        
+        </div>
+        
+    </article>
+    
+
+    
+        
+    <article class="post">
+        <header class="post-header">
+            <div class="post-time syuanpi riseIn-light back-1">
+                <span>August 19, 2019</span>
+                
+            </div>
+            <h1 class="post-title syuanpi riseIn-light back-2">
+            
+                <a href="/SeanCherngTW.github.io/2019/08/19/ML-Lecture-2-Where-does-the-error-come-from/">ML Lecture 2: Where does the error come from?</a>
+            
+            </h1>
+            
+        </header>
+        <div class="post-content syuanpi riseIn-light back-3">
+            
+                
+                    <p>Variance / Bias<br><img src="https://i.imgur.com/sf7UNEs.png" alt=""></p>
+                    
+            
+        
+            <p class="content-link">
+                <a href="/SeanCherngTW.github.io/2019/08/19/ML-Lecture-2-Where-does-the-error-come-from/#more">
+                    <span class="iconfont icon-right">Read More...</span>
+                </a>
+            </p>
+        
+        </div>
+        
+    </article>
+    
+
+    
+        
+    <article class="post">
+        <header class="post-header">
+            <div class="post-time syuanpi riseIn-light back-1">
+                <span>August 19, 2019</span>
+                
+            </div>
+            <h1 class="post-title syuanpi riseIn-light back-2">
+            
+                <a href="/SeanCherngTW.github.io/2019/08/19/ML-Lecture-1-Regression-Case-Study/">ML Lecture 1: Regression - Case Study</a>
+            
+            </h1>
+            
+        </header>
+        <div class="post-content syuanpi riseIn-light back-3">
+            
+                
+                    <h3 id="ML三步驟"><a href="#ML三步驟" class="headerlink" title="ML三步驟"></a>ML三步驟</h3><ol>
+<li>準備一組function set（設計model）<ul>
+<li>可以把function set想成Model，不同的model代表不同function set</li>
+<li>同一個model代表同一個function set，參數中不同的weight和bias就代表同一個function set中不同的function</li>
+</ul>
+</li>
+<li>判斷function set中，每一個function的好壞<ul>
+<li>使用Loss function來判斷function的好壞<ul>
+<li>具體作法：把Training data的X作為輸入，計算function產出的y與實際的y相差多少，這個相差的值就稱為Loss（或error）</li>
+<li>Loss越低，代表此function對於training data的擬合度很高，但對於testing data卻不一定也是如此（可能overfitting）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>找出最佳的function<ul>
+<li>使用Gradient Descent來決定function中的weight應該要如何修正<ul>
+<li>function中會有很多參數（weight），對參數做偏微分後，即可得到該參數的斜率。將偏微分的結果（方向）乘上Learning rate（步伐），即可算出這個weight應該要增加或減少多少，目標是使Loss降到最低</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+                    
+            
+        
+            <p class="content-link">
+                <a href="/SeanCherngTW.github.io/2019/08/19/ML-Lecture-1-Regression-Case-Study/#more">
+                    <span class="iconfont icon-right">Read More...</span>
+                </a>
+            </p>
+        
+        </div>
+        
+    </article>
+    
+
+    
+        
+    <article class="post">
+        <header class="post-header">
+            <div class="post-time syuanpi riseIn-light back-1">
+                <span>August 19, 2019</span>
+                
+            </div>
+            <h1 class="post-title syuanpi riseIn-light back-2">
+            
+                <a href="/SeanCherngTW.github.io/2019/08/19/ML-Lecture-0-1-Introduction-of-Machine-Learning/">ML Lecture 0-1: Introduction of Machine Learning</a>
+            
+            </h1>
+            
+        </header>
+        <div class="post-content syuanpi riseIn-light back-3">
+            
+                
+                    <h3 id="AI-v-s-ML-v-s-DL"><a href="#AI-v-s-ML-v-s-DL" class="headerlink" title="AI v.s. ML v.s. DL"></a>AI v.s. ML v.s. DL</h3><ul>
+<li>AI是達到人工智慧的「目標」</li>
+<li>Machine Learning是達到AI的手段之一</li>
+<li>Deep Learning則是Machine Learning的方法之一</li>
+</ul>
+                    
+            
+        
+            <p class="content-link">
+                <a href="/SeanCherngTW.github.io/2019/08/19/ML-Lecture-0-1-Introduction-of-Machine-Learning/#more">
+                    <span class="iconfont icon-right">Read More...</span>
+                </a>
+            </p>
+        
+        </div>
+        
+    </article>
+    
+
+    
+        
+    <article class="post">
+        <header class="post-header">
+            <div class="post-time syuanpi riseIn-light back-1">
+                <span>October 7, 2017</span>
+                
+            </div>
+            <h1 class="post-title syuanpi riseIn-light back-2">
+            
+                <a href="/SeanCherngTW.github.io/2017/10/07/Selenium-Beautiful-Soup-爬蟲入門/">Selenium + Beautiful Soup 爬蟲入門</a>
+            
+            </h1>
+            
+        </header>
+        <div class="post-content syuanpi riseIn-light back-3">
+            
+                
+                    <p>環境: Python3.6<br>首先要安裝</p>
+<ol>
+<li>selenium</li>
+<li><p>bs4</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ pip install selenium</div><div class="line">$ pip install bs4</div></pre></td></tr></table></figure>
+</li>
+<li><p><a href="https://sites.google.com/a/chromium.org/chromedriver/downloads" target="_blank" rel="external">ChromeDriver</a>(你也可以裝其他瀏覽器的Driver)</p>
+</li>
+</ol>
+<p>環境搞定後就開始寫程式吧！<br>
+                    
+            
+        
+            <p class="content-link">
+                <a href="/SeanCherngTW.github.io/2017/10/07/Selenium-Beautiful-Soup-爬蟲入門/#more">
+                    <span class="iconfont icon-right">Read More...</span>
+                </a>
+            </p>
+        
+        </div>
+        
+    </article>
+    
+
+    
+</section>
+    
+    <nav class="pagination">
+        <span class="page-number current">1</span>
+    </nav>
+
+
+        </main>
+        <footer class="footer syuanpi fadeIn" id="footer">
+    <hr>
+    <div class="footer-wrapper">
+        <div class="left">
+            <div class="contact-icon">
+    
+    
+    
+    
+    
+    
+    
+    
+</div>
+        </div>
+        <div class="right">
+            <div class="copyright">
+    <div class="info">
+        <span>&copy;</span>
+        <span>2017 ~ 2020</span>
+        <span>❤</span>
+        <span>Sean Cherng</span>
+    </div>
+    <div class="theme">
+        <span>
+            Powered by
+            <a href="http://hexo.io/" target="_blank">Hexo </a>
+        </span>
+        <span>
+            Theme
+            <a href="https://github.com/ColMugX/hexo-theme-Nlvi"> Nlvi </a>
+        </span>
+    </div>
+    
+</div>
+        </div>
+    </div>
+</footer>
+    </div>
+    <script src="/SeanCherngTW.github.io/script/nlvi.js"></script>
+<script src="/SeanCherngTW.github.io/script/search.js"></script>
+
+    <script src="/SeanCherngTW.github.io/lightbox/js/lightbox.min.js"></script>
+
+<script>
+$(document).ready(function(){
+    document.body.addEventListener('touchstart', function () {});
+    $('.progress').hide();
+    $('.body').show();
+    Nlvi.tagcloud();
+    Nlvi.mobileHeader();
+    Nlvi.back2top();
+    Nlvi.smoothScroll();
+    Nlvi.onView();
+    Nlvi.showToc();
+    Nlvi.showComments();
+    Nlvi.showReward();
+    Nlvi.picPos();
+
+    !CONFIG.animate && Nlvi.offAnimate();
+    CONFIG.lightbox && Nlvi.onPicBox();
+})
+</script>
+    </div>
+    
+    <div class="backtop syuanpi dead toTop" id="backtop">
+    <i class="iconfont icon-up"></i>
+    <span style="text-align:center;font-family:Georgia;"><span style="font-family:Georgia;" id="scrollpercent">1</span>%</span>
+</div>
+    
+    <div class="search" id="search">
+        <div class="mask" id="mask"></div>
+        <div class="search-wrapper syuanpi">
+            <h1 id="search-header" class="syuanpi">搜索一下？</h1>
+            <div class="input">
+                <input type="text" id="local-search-input" results="0" name="">
+            </div>
+            <div id="local-search-result"></div>
+        </div>
+    </div>
+    <script>
+    var GREETING = {
+        morning: "想找什麼呢？",
+        noon: "想找什麼呢？",
+        after: "想找什麼呢？",
+        night: "想找什麼呢？",
+        midnight: "想找什麼呢？"
+    }
+    $(document).ready(function(){
+        Nlvi.search();
+    });
+    </script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+</body>
+</html>
