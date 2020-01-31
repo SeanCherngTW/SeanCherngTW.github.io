@@ -227,13 +227,11 @@
 <li><p>執行指令</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ jupyter notebook --generate-config</div></pre></td></tr></table></figure>
 </li>
-<li><p>執行指令</p>
+<li><p>執行指令設定密碼</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ jupyter notebook password</div></pre></td></tr></table></figure>
 </li>
-</ol>
-<p>並設定密碼</p>
-<ol>
-<li>去~/.jupyter/jupyter_notebook_config.json找到你密碼的SHA1</li>
+<li><p>去~/.jupyter/jupyter_notebook_config.json找到你密碼的SHA1</p>
+</li>
 <li>編輯 ~/.jupyter/jupyter_notebook_config.py如下：<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">c.NotebookApp.open_browser = False</div><div class="line">c.NotebookApp.password = u&apos;sha1:[YOUR SHA1]&apos;</div><div class="line">c.NotebookApp.password_required = True</div><div class="line">c.NotebookApp.port = [YOUR PORT] # 要確定這個PORT沒有人在用</div><div class="line">c.NotebookApp.ip = &apos;*&apos;</div></pre></td></tr></table></figure></li>
 </ol>
 
