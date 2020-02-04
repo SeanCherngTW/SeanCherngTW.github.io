@@ -1,0 +1,221 @@
+<!DOCTYPE HTML>
+<html lang="">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+  
+  <title>使用SavedModel和Predictor方便地將TensorFlow模型架設於Flask上 | Sean Chenrg&#39;s Blog</title>
+  <meta name="author" content="Sean Cherng">
+  
+  <meta name="description" content="Introduction當我們訓練好一個模型後，可能會需要把它透過Flask架設成一個web service，而我們希望在server開啟時能夠讀入模型，每當之後呼叫API時，能直接讀取這個模型進行預測，而不是每次call API後才讀取Model。
+Previous method以往在儲存Tens">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="使用SavedModel和Predictor方便地將TensorFlow模型架設於Flask上"/>
+  <meta property="og:site_name" content="Sean Chenrg&#39;s Blog"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Sean Chenrg&#39;s Blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+</head>
+
+
+<body>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Sean Chenrg&#39;s Blog</a></h1>
+  <h2><a href="/"></a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article id="post-使用SavedModel和Predictor方便地將TensorFlow模型架設於Flask上" class="h-entry post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time class="dt-published" datetime="2020-02-04T04:14:18.000Z"><a href="/2020/02/04/使用SavedModel和Predictor方便地將TensorFlow模型架設於Flask上/">2020-02-04</a></time>
+      
+      
+  
+    <h1 class="p-name title" itemprop="headline name">使用SavedModel和Predictor方便地將TensorFlow模型架設於Flask上</h1>
+  
+
+    </header>
+    <div class="e-content entry" itemprop="articleBody">
+      
+        <h3 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h3><p>當我們訓練好一個模型後，可能會需要把它透過Flask架設成一個web service，而我們希望在server開啟時能夠讀入模型，每當之後呼叫API時，能直接讀取這個模型進行預測，而不是每次call API後才讀取Model。</p>
+<h3 id="Previous-method"><a href="#Previous-method" class="headerlink" title="Previous method"></a>Previous method</h3><p>以往在儲存TensorFlow模型時，多半在Session內建立Saver，並透過<figure class="highlight plain"><figcaption><span>API後才讀取Model」</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">### SavedModel &amp; Predictor</div><div class="line">所以，我們希望能跳脫Session這個框架來完成我們的目標，這次要介紹的方法是```SavedModel```和```Predictor```。```SavedModel```用來儲存模型參數，```Predictor```用來讀取模型參數後直接進行預測，這邊我借用莫凡Tensorflow的範例來解釋：</div><div class="line"></div><div class="line">#### SavedModel</div><div class="line"></div><div class="line">```python=</div><div class="line">import tensorflow as tf</div><div class="line">import tensorflow.examples.tutorials.mnist.input_data as input_data</div><div class="line">from tensorflow.contrib import predictor</div><div class="line"></div><div class="line">mnist = input_data.read_data_sets(&quot;MNIST_data/&quot;, one_hot=True)</div><div class="line"></div><div class="line"></div><div class="line">def train():</div><div class="line">    def add_layer(output_dim, input_dim, inputs, activation_function=None):</div><div class="line">        W = tf.Variable(tf.random_normal([input_dim, output_dim]))</div><div class="line">        b = tf.Variable(tf.random_normal([1, output_dim]))</div><div class="line">        if activation_function is None:</div><div class="line">            outputs = tf.add(tf.matmul(inputs, W), b)</div><div class="line">        else:</div><div class="line">            outputs = activation_function(tf.add(tf.matmul(inputs, W), b))</div><div class="line">        return outputs</div><div class="line">    X = tf.placeholder(&apos;float&apos;, [None, 784])</div><div class="line">    h1 = add_layer(output_dim=1000, input_dim=784, inputs=X, activation_function=tf.nn.relu)</div><div class="line">    y = add_layer(output_dim=10, input_dim=1000, inputs=h1, activation_function=None)</div><div class="line">    y_hat = tf.placeholder(&apos;float&apos;, [None, 10])</div><div class="line"></div><div class="line">    loss_function = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits_v2(logits=y, labels=y_hat))</div><div class="line">    optimizer = tf.train.AdamOptimizer(learning_rate=0.001).minimize(loss_function)</div><div class="line">    correct_prediction_count = tf.equal(tf.argmax(y_hat, 1), tf.argmax(y, 1))</div><div class="line">    acc = tf.reduce_mean(tf.cast(correct_prediction_count, &apos;float&apos;), name=&apos;acc&apos;)</div><div class="line"></div><div class="line">    epoch = 15</div><div class="line">    batch_size = 100</div><div class="line">    batch = int(mnist.train.num_examples / batch_size)</div><div class="line"></div><div class="line">    with tf.Session() as sess:</div><div class="line">        sess.run(tf.global_variables_initializer())</div><div class="line">        for i in range(epoch):</div><div class="line">            for _ in range(batch):</div><div class="line">                batch_x, batch_y = mnist.train.next_batch(batch_size)</div><div class="line">                sess.run(optimizer, feed_dict=&#123;X: batch_x, y_hat: batch_y&#125;)</div><div class="line"></div><div class="line">        tf.saved_model.simple_save(sess, &quot;./savemodel&quot;, inputs=&#123;&quot;input_X&quot;: X, &quot;y_hat&quot;: y_hat&#125;, outputs=&#123;&quot;output_y&quot;: y, &quot;acc&quot;: acc&#125;)</div><div class="line"></div><div class="line"></div><div class="line">train()</div></pre></td></tr></table></figure></p>
+<p>在這個例子中，我們在<figure class="highlight plain"><figcaption><span>"./savemodel", inputs</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">#### Predictor</div><div class="line">```python=</div><div class="line">def testacc():</div><div class="line">    predict_fn = predictor.from_saved_model(&apos;savemodel/&apos;)</div><div class="line">    acc = predict_fn(&#123;</div><div class="line">        &quot;input_X&quot;: mnist.test.images,</div><div class="line">        &quot;y_hat&quot;: mnist.test.labels</div><div class="line">    &#125;)[&quot;acc&quot;]</div><div class="line">    print(acc)</div><div class="line"></div><div class="line">def pred():</div><div class="line">    predict_fn = predictor.from_saved_model(&apos;savemodel/&apos;)</div><div class="line">    pred = predict_fn(&#123;</div><div class="line">        &quot;input_X&quot;: mnist.test.images,</div><div class="line">        &quot;y_hat&quot;: mnist.test.labels</div><div class="line">    &#125;)[&quot;output_y&quot;]</div><div class="line">    return pred</div><div class="line"></div><div class="line">testacc()</div><div class="line">pred()</div></pre></td></tr></table></figure></p>
+<p>當我們要讀取模型參數進行預測時，直接呼叫<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">如此一來，我們不必透過Session和Saver，就可以達到Save&amp;Retore的效果</div><div class="line"></div><div class="line">#### Flask</div><div class="line">跳脫Session框架後，即可更便利地將模型架設在Flask上，完整程式碼如下：</div></pre></td></tr></table></figure></p>
+<p>import flask<br>import tensorflow as tf<br>import tensorflow.examples.tutorials.mnist.input_data as input_data<br>from tensorflow.contrib import predictor</p>
+<p>app = flask.Flask(<strong>name</strong>)</p>
+<p>mnist = input_data.read_data_sets(“MNIST_data/“, one_hot=True)</p>
+<p>@app.route(‘/testacc’, methods=[‘GET’])<br>def testacc():<br>    predict_fn = predictor.from_saved_model(‘savemodel/‘)<br>    acc = predict_fn({<br>        “input_X”: mnist.test.images,<br>        “y_hat”: mnist.test.labels<br>    })[“acc”]<br>    print(pred)<br>    return acc</p>
+<p>@app.route(‘/pred’, methods=[‘GET’])<br>def pred():<br>    predict_fn = predictor.from_saved_model(‘savemodel/‘)<br>    pred = predict_fn({<br>        “input_X”: mnist.test.images,<br>        “y_hat”: mnist.test.labels<br>    })[“output_y”]<br>    return pred</p>
+<p>if <strong>name</strong> == ‘<strong>main</strong>‘:<br>    app.debug = True<br>    app.run()<br>```</p>
+<h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><p><a href="https://guillaumegenthial.github.io/serving-tensorflow-estimator.html#training-the-estimator" target="_blank" rel="external">Save and Restore a tf.estimator for inference</a><br><a href="https://juejin.im/post/5bbfedd65188255c9b13d964" target="_blank" rel="external">Tensorflow SavedModel模型的保存与加载</a><br><a href="https://www.tensorflow.org/versions/r1.15/api_docs/python/tf/contrib/predictor/from_saved_model?authuser=3&amp;hl=Language" target="_blank" rel="external">tf.contrib.predictor.from_saved_model</a><br><a href="https://morvanzhou.github.io/tutorials/machine-learning/tensorflow/" target="_blank" rel="external">莫凡TensorFlow</a></p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+  
+  <div class="tags">
+    <a href="/tags/TensorFlow/">TensorFlow</a>
+  </div>
+
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">Kommentare</h1>
+
+  
+      <div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div class="fb-comments" data-href="https://seancherngtw.github.io/2020/02/04/使用SavedModel和Predictor方便地將TensorFlow模型架設於Flask上/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+      
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Suche">
+    <input type="hidden" name="as_sitesearch" value="seancherngtw.github.io">
+  </form>
+</div>
+
+
+  
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/Jupyter-Notebook/">Jupyter Notebook</a><small>1</small></li>
+  
+    <li><a href="/tags/NLP/">NLP</a><small>3</small></li>
+  
+    <li><a href="/tags/Python/">Python</a><small>1</small></li>
+  
+    <li><a href="/tags/TensorFlow/">TensorFlow</a><small>2</small></li>
+  
+    <li><a href="/tags/李宏毅機器學習筆記/">李宏毅機器學習筆記</a><small>5</small></li>
+  
+    <li><a href="/tags/深度學習/">深度學習</a><small>4</small></li>
+  
+    <li><a href="/tags/網頁爬蟲/">網頁爬蟲</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2020 Sean Cherng
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="/js/jquery-3.4.1.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+<script type="text/javascript">
+var disqus_shortname = 'SeanCherngTW';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+</body>
+</html>

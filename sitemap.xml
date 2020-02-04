@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://seancherngtw.github.io/2020/01/30/%E4%B8%89%E7%A8%AERNN-Cell%E4%B9%8Boutput%E5%92%8Cstate%E5%B7%AE%E7%95%B0/</loc>
+    
+    <lastmod>2020-02-04T04:45:41.367Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://seancherngtw.github.io/2020/02/04/%E4%BD%BF%E7%94%A8SavedModel%E5%92%8CPredictor%E6%96%B9%E4%BE%BF%E5%9C%B0%E5%B0%87TensorFlow%E6%A8%A1%E5%9E%8B%E6%9E%B6%E8%A8%AD%E6%96%BCFlask%E4%B8%8A/</loc>
+    
+    <lastmod>2020-02-04T04:43:08.347Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://seancherngtw.github.io/2020/01/20/TinyBERT%E7%B0%A1%E7%9F%AD%E9%87%8D%E9%BB%9E%E6%95%B4%E7%90%86/</loc>
     
     <lastmod>2020-01-31T06:37:06.278Z</lastmod>
@@ -33,13 +47,6 @@
     <loc>https://seancherngtw.github.io/2020/01/31/%E9%80%8F%E9%81%8Essh%E8%A8%AD%E5%AE%9A%E9%81%A0%E7%AB%AFJupyter-Notebook/</loc>
     
     <lastmod>2020-01-31T05:48:38.219Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://seancherngtw.github.io/2020/01/30/%E4%B8%89%E7%A8%AERNN-Cell%E4%B9%8Boutput%E5%92%8Cstate%E5%B7%AE%E7%95%B0/</loc>
-    
-    <lastmod>2020-01-31T04:51:11.329Z</lastmod>
     
   </url>
   

@@ -85,7 +85,7 @@
 <li><script type="math/tex">c^{t-1}</script> 為時間點 <script type="math/tex">c-1</script> 時的記憶</li>
 <li><script type="math/tex">c^{t}</script> 則為時間點 <script type="math/tex">c</script> 時的記憶</li>
 </ul>
-<p>我們使用單層LSTM時，呼叫<code>outputs, state = tf.compat.v1.nn.dynamic_rnn()</code>所得到的<code>output</code>在 $t$ 時間是 <script type="math/tex">{h^{t}}</script> ，但state會是 <script type="math/tex">[{c^t},{h^{t}}]</script>，因此兩者不同。若使用深層LSTM架構時，如下圖：<br><br></p>
+<p>我們使用單層LSTM時，呼叫<code>outputs, state = tf.compat.v1.nn.dynamic_rnn()</code>所得到的<code>output</code>在 <script type="math/tex">t</script> 時間是 <script type="math/tex">{h^{t}}</script> ，但state會是 <script type="math/tex">[{c^t},{h^{t}}]</script>，因此兩者不同。若使用深層LSTM架構時，如下圖：<br><br></p>
 <p><img src="https://i.imgur.com/Fti66rk.png" alt=""><br><br></p>
 <p>以 <script type="math/tex">t+1</script> 時間點為例，output為最後一層的 <script type="math/tex">t+1</script> 時間點輸出，是 <script type="math/tex">{h^{t+1}_{l+2}}</script>，而state則是每一層的 <script type="math/tex">t+1</script> 時間點的 <script type="math/tex">c^{t+1}</script> <script type="math/tex">h^{t+1}</script> 結合成的list，也就是<script type="math/tex">[[c^{t-1},h^{t-1}], [c^{t}, h^{t}], [c^{t+1}, h^{t+1}]]</script>。因此在LSTM Cell的狀況下，不管單層或多層，output和state都不會相等。</p>
 <h3 id="GRU-Cell"><a href="#GRU-Cell" class="headerlink" title="GRU Cell"></a>GRU Cell</h3><p>相較於LSTM Cell，GRU Cell使用了Memory gate取代Input gate和Forget gate，讓參數可以有效減少，同時GRU也不像LSTM有 <script type="math/tex">c^t</script> 來儲存記憶狀態，如下圖所示：<br><br></p>
@@ -189,7 +189,7 @@
   
     <li><a href="/tags/Python/">Python</a><small>1</small></li>
   
-    <li><a href="/tags/TensorFlow/">TensorFlow</a><small>1</small></li>
+    <li><a href="/tags/TensorFlow/">TensorFlow</a><small>2</small></li>
   
     <li><a href="/tags/李宏毅機器學習筆記/">李宏毅機器學習筆記</a><small>5</small></li>
   
