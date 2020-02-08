@@ -44,6 +44,51 @@
 </header>
   <div id="content" class="inner">
     <div id="main-col" class="alignleft"><div id="wrapper">
+  <article id="post-實習面試心得-2016-Summer" class="h-entry post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time class="dt-published" datetime="2020-02-08T12:46:57.000Z"><a href="/2020/02/08/實習面試心得-2016-Summer/">2020-02-08</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2020/02/08/實習面試心得-2016-Summer/">實習面試心得 @ 2016 Summer</a></h1>
+  
+
+    </header>
+    <div class="e-content entry" itemprop="articleBody">
+      
+        <h2 id="實習面試心得-2016-Summer"><a href="#實習面試心得-2016-Summer" class="headerlink" title="實習面試心得 @ 2016 Summer"></a>實習面試心得 @ 2016 Summer</h2><p>大一大二時由於暑假都有安排營隊活動，必須忙到7月中，所以這兩年並沒有去申請實習，一直到2016年也就是我大三的那年，在暑假沒有特別安排的情況下，希望能找點工作來充實自己，所以選擇申請暑期實習。不過也因為這個時候的我其實並沒有太多專長和專案經驗，包含專題也尚未開始，只有修過一些程式選修課和讀過基本的程式書而已，所以這個階段找工作不是很順利。在2016年暑假時我投遞的公司職位如下：（時間太久遠了，有些確切的職位已不可考，有些職位名稱則不完全一致，請見諒）</p>
+<ol>
+<li>Dell - Software Engineer（面試兩個Team皆不錄用）</li>
+<li>IBM - IT Specialist（一面後不錄用）</li>
+<li>Microsoft - RDAA（三面後不錄用）</li>
+<li>Yahoo - E-commerce Engineer &amp; Production Engineer（履歷無聲卡）</li>
+<li>TrandMicro - Software Engineer（履歷無聲卡）</li>
+<li>Intel - IOT Engineer &amp; Marketing（履歷無聲卡）</li>
+</ol>
+<p>在履歷審查就被刷掉的就沒什麼好說的了，以下紀錄我面試那三間公司的情況與心得：</p>
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2020/02/08/實習面試心得-2016-Summer/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
   <article id="post-使用SavedModel和Predictor方便地將TensorFlow模型架設於Flask上" class="h-entry post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   
   <div class="post-content">
@@ -61,6 +106,8 @@
     <div class="e-content entry" itemprop="articleBody">
       
         <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>當我們訓練好一個模型後，可能會需要把它透過Flask架設成一個web service，而我們希望在server開啟時能夠讀入模型，每當之後呼叫API時，能直接讀取這個模型進行預測，而不是每次call API後才讀取Model。</p>
+<h2 id="Previous-method"><a href="#Previous-method" class="headerlink" title="Previous method"></a>Previous method</h2><p>以往在儲存TensorFlow模型時，多半在Session內建立Saver，並透過saver.save()和saver.restore()去實現，自己使用這個方法嘗試之後，發現Saver和Sess似乎沒辦法預先restore模型參數，直接在webAPI指定的方法predict()使用，而是需要在predict()方法中建立一個Session然後restore()後才能預測，但這樣就違背我們一開始的假設「每當之後呼叫API時，能直接讀取這個Model進行預測，而不是每次call API後才讀取Model」</p>
+<h2 id="SavedModel-amp-Predictor"><a href="#SavedModel-amp-Predictor" class="headerlink" title="SavedModel &amp; Predictor"></a>SavedModel &amp; Predictor</h2><p>所以，我們希望能跳脫Session這個框架來完成我們的目標，這次要介紹的方法是SavedModel和Predictor。SavedModel用來儲存模型參數，Predictor用來讀取模型參數後直接進行預測，這邊我借用莫凡Tensorflow的範例來解釋：</p>
       
     </div>
     <footer>
@@ -385,63 +432,6 @@
 
 
 
-  <article id="post-ML-Lecture-1-Regression-Case-Study" class="h-entry post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time class="dt-published" datetime="2019-08-19T03:01:45.000Z"><a href="/2019/08/19/ML-Lecture-1-Regression-Case-Study/">2019-08-19</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2019/08/19/ML-Lecture-1-Regression-Case-Study/">ML Lecture 1: Regression - Case Study</a></h1>
-  
-
-    </header>
-    <div class="e-content entry" itemprop="articleBody">
-      
-        <h3 id="ML三步驟"><a href="#ML三步驟" class="headerlink" title="ML三步驟"></a>ML三步驟</h3><ol>
-<li>準備一組function set（設計model）<ul>
-<li>可以把function set想成Model，不同的model代表不同function set</li>
-<li>同一個model代表同一個function set，參數中不同的weight和bias就代表同一個function set中不同的function</li>
-</ul>
-</li>
-<li>判斷function set中，每一個function的好壞<ul>
-<li>使用Loss function來判斷function的好壞<ul>
-<li>具體作法：把Training data的X作為輸入，計算function產出的y與實際的y相差多少，這個相差的值就稱為Loss（或error）</li>
-<li>Loss越低，代表此function對於training data的擬合度很高，但對於testing data卻不一定也是如此（可能overfitting）</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>找出最佳的function<ul>
-<li>使用Gradient Descent來決定function中的weight應該要如何修正<ul>
-<li>function中會有很多參數（weight），對參數做偏微分後，即可得到該參數的斜率。將偏微分的結果（方向）乘上Learning rate（步伐），即可算出這個weight應該要增加或減少多少，目標是使Loss降到最低</li>
-</ul>
-</li>
-</ul>
-</li>
-</ol>
-      
-    </div>
-    <footer>
-      
-        
-          <div class="alignleft">
-            <a href="/2019/08/19/ML-Lecture-1-Regression-Case-Study/#more" class="more-link">Read More</a>
-          </div>
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
 
 <nav id="pagination">
   
@@ -479,6 +469,8 @@
     <li><a href="/tags/深度學習/">深度學習</a><small>4</small></li>
   
     <li><a href="/tags/網頁爬蟲/">網頁爬蟲</a><small>1</small></li>
+  
+    <li><a href="/tags/面試心得/">面試心得</a><small>1</small></li>
   
   </ul>
 </div>

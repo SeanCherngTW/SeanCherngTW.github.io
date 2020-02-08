@@ -44,6 +44,63 @@
 </header>
   <div id="content" class="inner">
     <div id="main-col" class="alignleft"><div id="wrapper">
+  <article id="post-ML-Lecture-1-Regression-Case-Study" class="h-entry post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time class="dt-published" datetime="2019-08-19T03:01:45.000Z"><a href="/2019/08/19/ML-Lecture-1-Regression-Case-Study/">2019-08-19</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2019/08/19/ML-Lecture-1-Regression-Case-Study/">ML Lecture 1: Regression - Case Study</a></h1>
+  
+
+    </header>
+    <div class="e-content entry" itemprop="articleBody">
+      
+        <h3 id="ML三步驟"><a href="#ML三步驟" class="headerlink" title="ML三步驟"></a>ML三步驟</h3><ol>
+<li>準備一組function set（設計model）<ul>
+<li>可以把function set想成Model，不同的model代表不同function set</li>
+<li>同一個model代表同一個function set，參數中不同的weight和bias就代表同一個function set中不同的function</li>
+</ul>
+</li>
+<li>判斷function set中，每一個function的好壞<ul>
+<li>使用Loss function來判斷function的好壞<ul>
+<li>具體作法：把Training data的X作為輸入，計算function產出的y與實際的y相差多少，這個相差的值就稱為Loss（或error）</li>
+<li>Loss越低，代表此function對於training data的擬合度很高，但對於testing data卻不一定也是如此（可能overfitting）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>找出最佳的function<ul>
+<li>使用Gradient Descent來決定function中的weight應該要如何修正<ul>
+<li>function中會有很多參數（weight），對參數做偏微分後，即可得到該參數的斜率。將偏微分的結果（方向）乘上Learning rate（步伐），即可算出這個weight應該要增加或減少多少，目標是使Loss降到最低</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2019/08/19/ML-Lecture-1-Regression-Case-Study/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
   <article id="post-ML-Lecture-0-1-Introduction-of-Machine-Learning" class="h-entry post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   
   <div class="post-content">
@@ -166,6 +223,8 @@
     <li><a href="/tags/深度學習/">深度學習</a><small>4</small></li>
   
     <li><a href="/tags/網頁爬蟲/">網頁爬蟲</a><small>1</small></li>
+  
+    <li><a href="/tags/面試心得/">面試心得</a><small>1</small></li>
   
   </ul>
 </div>
