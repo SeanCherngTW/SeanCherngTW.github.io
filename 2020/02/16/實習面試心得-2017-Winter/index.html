@@ -3,23 +3,17 @@
 <head>
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
   
-  <title>透過ssh設定遠端Jupyter Notebook | Sean Chenrg&#39;s Blog</title>
+  <title>實習面試心得 @ 2017 Winter | Sean Chenrg&#39;s Blog</title>
   <meta name="author" content="Sean Cherng">
   
-  <meta name="description" content="安裝jupyter notebook
-移動到母目錄 cd ~
-執行指令
-1$ jupyter notebook --generate-config
+  <meta name="description" content="這一年的寒假沒什麼特別的事情要忙，專題也差不多告一個段落，所以想趁這個空檔找一份實習來增進產業經驗。不過由於寒假很短，公司幾乎不太願意開寒假實習職缺，更別說軟體相關領域了，只有一個月很難在專案上做出成果來。花了一點時間在各大平台（104、yourator、LinkedIn等）找實習機會，唯一比較符合軟體相關實習缺的只有遠傳的資料科學家職位，因此這次也只投了一間公司。
 
-執行指令設定密碼
-1$ jupyter notebook password
-
-去~/.jupyter/jupyter_notebook_config.">
+遠傳電信 - Data Scientist Intern（筆試未通過）">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="透過ssh設定遠端Jupyter Notebook"/>
+  <meta property="og:title" content="實習面試心得 @ 2017 Winter"/>
   <meta property="og:site_name" content="Sean Chenrg&#39;s Blog"/>
 
   
@@ -53,35 +47,39 @@
 <div class="clearfix"></div>
 </header>
   <div id="content" class="inner">
-    <div id="main-col" class="alignleft"><div id="wrapper"><article id="post-透過ssh設定遠端Jupyter-Notebook" class="h-entry post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article id="post-實習面試心得-2017-Winter" class="h-entry post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   
   <div class="post-content">
     <header>
       
         <div class="icon"></div>
-        <time class="dt-published" datetime="2020-01-31T05:35:20.000Z"><a href="/2020/01/31/透過ssh設定遠端Jupyter-Notebook/">2020-01-31</a></time>
+        <time class="dt-published" datetime="2020-02-16T13:39:11.000Z"><a href="/2020/02/16/實習面試心得-2017-Winter/">2020-02-16</a></time>
       
       
   
-    <h1 class="p-name title" itemprop="headline name">透過ssh設定遠端Jupyter Notebook</h1>
+    <h1 class="p-name title" itemprop="headline name">實習面試心得 @ 2017 Winter</h1>
   
 
     </header>
     <div class="e-content entry" itemprop="articleBody">
       
-        <ol>
-<li>安裝jupyter notebook</li>
-<li>移動到母目錄 cd ~</li>
-<li><p>執行指令</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ jupyter notebook --generate-config</div></pre></td></tr></table></figure>
-</li>
-<li><p>執行指令設定密碼</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ jupyter notebook password</div></pre></td></tr></table></figure>
-</li>
-<li><p>去~/.jupyter/jupyter_notebook_config.json找到你密碼的SHA1</p>
-</li>
-<li>編輯 ~/.jupyter/jupyter_notebook_config.py如下：<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">c.NotebookApp.open_browser = False</div><div class="line">c.NotebookApp.password = u&apos;sha1:[YOUR SHA1]&apos;</div><div class="line">c.NotebookApp.password_required = True</div><div class="line">c.NotebookApp.port = [YOUR PORT] # 要確定這個PORT沒有人在用</div><div class="line">c.NotebookApp.ip = &apos;*&apos;</div></pre></td></tr></table></figure></li>
+        <p>這一年的寒假沒什麼特別的事情要忙，專題也差不多告一個段落，所以想趁這個空檔找一份實習來增進產業經驗。不過由於寒假很短，公司幾乎不太願意開寒假實習職缺，更別說軟體相關領域了，只有一個月很難在專案上做出成果來。花了一點時間在各大平台（104、yourator、LinkedIn等）找實習機會，唯一比較符合軟體相關實習缺的只有遠傳的資料科學家職位，因此這次也只投了一間公司。</p>
+<ol>
+<li>遠傳電信 - Data Scientist Intern（筆試未通過）</li>
 </ol>
+<a id="more"></a>
+<h3 id="遠傳電信-Data-Scientist-Intern"><a href="#遠傳電信-Data-Scientist-Intern" class="headerlink" title="遠傳電信 - Data Scientist Intern"></a>遠傳電信 - Data Scientist Intern</h3><p>面試流程：筆試 -&gt; 面談</p>
+<p>投遞履歷後沒多久，就收到遠傳人資部門寄來的筆試通知，位置在台大德田館的某一間階梯教室。筆試當天，教室內目測大約有50人左右，考試內容為全英文，印象中限時30分鐘，寫起來滿趕的，時間不太夠，總共大約20-30題選擇題和2題申論題，考題分為以下三大部分：</p>
+<ol>
+<li><p>邏輯推理智力測驗(選擇題)<br>考題跟IBM有點類似，給你一串數列或一系列相似的圖形，要你選出下一個可能的數字／圖形，或是選出題目中不合規律的選項。總體而言題目難度比IBM智力測驗難一點，在時間壓力下也比較難靜下心來算每一題的答案。</p>
+</li>
+<li><p>數學應用題(選擇題)<br>題目給你一大段英文敘述和問題，要根據問題選出正確的答案，這一類型的問題通常你只要看懂題目，就可以列出方程式求解（可能是一元二次方程式或二元一次方程式等），題目本身不難，難的是要在短時間內看懂英文並理解題目敘述。</p>
+</li>
+<li><p>資料分析情境題(申論題)<br>題目給你一段敘述和資料，內容是遠傳的季度會員人數、人數增減、年齡分布等資訊，要你從原始資料分析出造成某種現象的理由（比如說為何老年人口申辦門號比例逐年下降、為何某季度的申辦門號人數大減等等），並寫下如何改善問題的方法。由於前兩部分花了我太多時間，申論題我答得有點草率，只求能有一些墨水分數。</p>
+</li>
+</ol>
+<p>總體來說這份考卷我沒有寫得很理想，所以在考試結束後一週就收到了感謝信，沒能進入下一階段的用人主管面試。</p>
+<p>結果：筆試未通過</p>
 
       
     </div>
@@ -91,7 +89,7 @@
         
   
   <div class="tags">
-    <a href="/tags/Jupyter-Notebook/">Jupyter Notebook</a>
+    <a href="/tags/面試心得/">面試心得</a>
   </div>
 
         
@@ -134,7 +132,7 @@
   }(document, 'script', 'facebook-jssdk'));
 </script>
 
-<div class="fb-comments" data-href="https://seancherngtw.github.io/2020/01/31/透過ssh設定遠端Jupyter-Notebook/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+<div class="fb-comments" data-href="https://seancherngtw.github.io/2020/02/16/實習面試心得-2017-Winter/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
       
   
 </section>
